@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@model List<MusicVenue>
+<head>
+    <title>Music Venues</title>
+</head>
+
+<body>
+
+    <header>
+        <h2>Χώροι Συναυλιών</h2>
+    </header>
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-4 text-start"><a asp-controller="MusicVenue" asp-action="Create" class="btn btn-primary">Νέος Χώρος</a></div>
+        </div>
+    <table>
+        <thead>
+            <tr>
+                <th> Ονομασία Χώρου</th>
+                <th>Τοποθεσία</th>
+                <th>Χωρητικότητα</th>
+                <th>Περιγραφή</th>
+                <th>Ενέργεια</th>
+            </tr>
+        </thead>  
+        <tbody>
+            @foreach (var obj in Model){
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.Location</td>
+                    <td>@obj.Capacity</td>
+                    <td>@obj.Description</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+
+</body>
+</html>

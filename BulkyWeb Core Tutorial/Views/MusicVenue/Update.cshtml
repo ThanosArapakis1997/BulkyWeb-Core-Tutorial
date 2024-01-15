@@ -1,0 +1,58 @@
+﻿@model MusicVenue
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Edit Category</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <input asp-for="Id" hidden />
+            <div class="border p-3 mt-4">
+                @*<div asp-validation-summary="ModelOnly"></div>*@
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2">Όνομα</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Location" class="form-control border-0 shadow" />
+                    <label asp-for="Location" class="ms-2">Τοποθεσία</label>
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Capacity" class="form-control border-0 shadow" />
+                    <label asp-for="Capacity" class="ms-2">Χωρητικότητα</label>
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Description" class="form-control border-0 shadow" />
+                    <label asp-for="Description" class="ms-2">Περιγραφή</label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Αποθήκευση</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border  form-control">
+                            Επιστροφή στη Λίστα
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
