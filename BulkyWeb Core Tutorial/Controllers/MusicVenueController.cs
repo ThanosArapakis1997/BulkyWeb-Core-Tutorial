@@ -30,6 +30,19 @@ namespace BulkyWeb_Core_Tutorial.Controllers
                 ModelState.AddModelError("name", "Θα πρέπει να συμπληρώσετε Όνομα");
             }
 
+            if (obj.AvailableFrom == null || obj.AvailableTo == null)
+            {
+                ModelState.AddModelError(string.Empty, "Θα πρέπει να συμπληρώσετε Περίοδο Διαθεσιμότητας");
+            }
+            else
+            {
+                if(obj.AvailableFrom.Value > obj.AvailableTo.Value)
+                {
+                    ModelState.AddModelError(string.Empty, "Η Ημερομηνία Εναρξης Διαθεσιμότητας δεν μπορεί να είναι μικρότερη της Ημερομηνίας Λήξης της Διαθεσιμότητας");
+                }
+            }
+                    
+
             if (ModelState.IsValid)
             {
                 _db.Music_Venues.Add(obj);
@@ -60,6 +73,18 @@ namespace BulkyWeb_Core_Tutorial.Controllers
             if (String.IsNullOrEmpty(obj.Name))
             {
                 ModelState.AddModelError("name", "Θα πρέπει να συμπληρώσετε Όνομα");
+            }
+
+            if (obj.AvailableFrom == null || obj.AvailableTo == null)
+            {
+                ModelState.AddModelError(string.Empty, "Θα πρέπει να συμπληρώσετε Περίοδο Διαθεσιμότητας");
+            }
+            else
+            {
+                if (obj.AvailableFrom.Value > obj.AvailableTo.Value)
+                {
+                    ModelState.AddModelError(string.Empty, "Η Ημερομηνία Εναρξης Διαθεσιμότητας δεν μπορεί να είναι μικρότερη της Ημερομηνίας Λήξης της Διαθεσιμότητας");
+                }
             }
 
             if (ModelState.IsValid)

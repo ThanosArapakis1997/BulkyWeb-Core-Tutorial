@@ -17,10 +17,11 @@
     <table>
         <thead>
             <tr>
-                <th> Ονομασία Χώρου</th>
-                <th>Τοποθεσία</th>
-                <th>Χωρητικότητα</th>
-                <th>Περιγραφή</th>
+                <th> ΟΝΟΜΑΣΙΑ ΧΩΡΟΥ</th>
+                <th>ΤΟΠΟΘΕΣΙΑ</th>
+                <th>ΧΩΡΗΤΙΚΟΤΗΤΑ</th>
+                <th>ΠΕΡΙΓΡΑΦΗ</th>
+                 <th>ΔΙΑΘΕΣΙΜΟ</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -32,6 +33,7 @@
                     <td>@obj.Location</td>
                     <td>@obj.Capacity</td>
                     <td>@obj.Description</td>
+                    <td>@obj.AvailablePeriod</td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 <a asp-action="Update" asp-route-id="@obj.Id" class="btn btn-primary mx-2">

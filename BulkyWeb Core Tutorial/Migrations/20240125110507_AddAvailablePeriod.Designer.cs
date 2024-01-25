@@ -4,6 +4,7 @@ using BulkyWeb_Core_Tutorial.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyWeb_Core_Tutorial.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240125110507_AddAvailablePeriod")]
+    partial class AddAvailablePeriod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +33,10 @@ namespace BulkyWeb_Core_Tutorial.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("AvailableFrom")
+                    b.Property<DateTime>("AvailableFrom")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("AvailableTo")
+                    b.Property<DateTime>("AvailableTo")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Capacity")
@@ -59,6 +62,8 @@ namespace BulkyWeb_Core_Tutorial.Migrations
                         new
                         {
                             Id = 1,
+                            AvailableFrom = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AvailableTo = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Capacity = 5000,
                             Description = "Τεχνόπολη Δήμου Αθηναίων",
                             Location = "Κεραμεικός",
@@ -67,6 +72,8 @@ namespace BulkyWeb_Core_Tutorial.Migrations
                         new
                         {
                             Id = 2,
+                            AvailableFrom = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AvailableTo = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Capacity = 2000,
                             Description = "Music Club",
                             Location = "Ταύρος",
@@ -75,6 +82,8 @@ namespace BulkyWeb_Core_Tutorial.Migrations
                         new
                         {
                             Id = 3,
+                            AvailableFrom = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            AvailableTo = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Capacity = 2000,
                             Description = "Συναυλιακός Χώρος Δήμου Πειραιά",
                             Location = "Πειραιάς",

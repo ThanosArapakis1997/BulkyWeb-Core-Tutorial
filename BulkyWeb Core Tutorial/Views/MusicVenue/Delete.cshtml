@@ -13,27 +13,35 @@
             <div class="border p-3 mt-4">
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Name" disabled class="form-control border-0 shadow" />
-                    <label asp-for="Name"  class="ms-2"></label>
+                    <label asp-for="Name" class="ms-2">Όνομα</label>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Location" disabled class="form-control border-0 shadow" />
-                    <label asp-for="Location" class="ms-2"></label>
+                    <label asp-for="Location" class="ms-2">Τοποθεσία</label>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Capacity" disabled class="form-control border-0 shadow" />
-                    <label asp-for="Capacity" class="ms-2"></label>
+                    <label asp-for="Capacity" class="ms-2">Χωρητικότητα</label>
                 </div>
                 <div class="form-floating py-2 col-12">
                     <input asp-for="Description" disabled class="form-control border-0 shadow" />
-                    <label asp-for="Description" class="ms-2"></label>
+                    <label asp-for="Description" class="ms-2">Περιγραφή</label>
+                </div>
+                 <div class="form-floating py-2 col-12">
+                    <input asp-for="AvailableFrom" disabled class="form-control border-0 shadow" />
+                    <label asp-for="AvailableFrom" class="ms-2">Διαθέσιμο Από</label>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="AvailableTo" disabled class="form-control border-0 shadow" />
+                    <label asp-for="AvailableTo" class="ms-2">Διαθέσιμο Μέχρι</label>
                 </div>
                 <div class="row mt-3">
                     <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-danger form-control">Delete</button>
+                        <button type="submit" class="btn btn-danger form-control">Διαγραφή</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary border  form-control">
-                            Back to List
+                        <a asp-controller="MusicVenue" asp-action="Index" class="btn btn-secondary border  form-control">
+                             Επιστροφή στη Λίστα
                         </a>
                     </div>
                 </div>
