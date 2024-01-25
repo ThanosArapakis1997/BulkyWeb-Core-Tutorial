@@ -1,8 +1,8 @@
-using BulkyWeb_Core_Tutorial.Models;
+using MGTConcerts.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BulkyWeb_Core_Tutorial.Controllers
+namespace MGTConcerts.Controllers
 {
     public class HomeController : Controller
     {

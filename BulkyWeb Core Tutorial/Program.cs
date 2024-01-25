@@ -1,5 +1,5 @@
-using BulkyWeb_Core_Tutorial.Data;
-using BulkyWeb_Core_Tutorial.Repository;
+using MGTConcerts.Data;
+using MGTConcerts.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

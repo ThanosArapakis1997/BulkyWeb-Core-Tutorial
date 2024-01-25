@@ -1,8 +1,8 @@
-﻿using BulkyWeb_Core_Tutorial.Data;
+﻿using MGTConcerts.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace BulkyWeb_Core_Tutorial.Repository
+namespace MGTConcerts.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

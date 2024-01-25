@@ -1,7 +1,7 @@
-﻿using BulkyWeb_Core_Tutorial.Models;
+﻿using MGTConcerts.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyWeb_Core_Tutorial.Data
+namespace MGTConcerts.Data
 {
     public class ApplicationDbContext : DbContext
     {

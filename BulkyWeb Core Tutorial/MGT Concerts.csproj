@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>BulkyWeb_Core_Tutorial</RootNamespace>
+    <RootNamespace>MGTConcerts</RootNamespace>
     <UserSecretsId>9267d6f2-d6a3-48f8-9515-19899bc9523d</UserSecretsId>
   </PropertyGroup>
 

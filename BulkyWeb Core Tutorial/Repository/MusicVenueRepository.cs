@@ -1,8 +1,8 @@
-﻿using BulkyWeb_Core_Tutorial.Data;
-using BulkyWeb_Core_Tutorial.Models;
+﻿using MGTConcerts.Data;
+using MGTConcerts.Models;
 using System.Linq.Expressions;
 
-namespace BulkyWeb_Core_Tutorial.Repository
+namespace MGTConcerts.Repository
 {
     public class MusicVenueRepository : Repository<MusicVenue>, IMusicVenueRepository
     {

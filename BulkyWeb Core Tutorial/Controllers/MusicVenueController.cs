@@ -1,9 +1,9 @@
-﻿using BulkyWeb_Core_Tutorial.Data;
-using BulkyWeb_Core_Tutorial.Models;
-using BulkyWeb_Core_Tutorial.Repository;
+﻿using MGTConcerts.Data;
+using MGTConcerts.Models;
+using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyWeb_Core_Tutorial.Controllers
+namespace MGTConcerts.Controllers
 {
     public class MusicVenueController : Controller
     {

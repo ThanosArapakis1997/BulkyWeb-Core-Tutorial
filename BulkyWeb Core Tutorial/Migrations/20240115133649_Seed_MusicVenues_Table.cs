@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace BulkyWeb_Core_Tutorial.Migrations
+namespace MGTConcerts.Migrations
 {
     /// <inheritdoc />
     public partial class Seed_MusicVenues_Table : Migration

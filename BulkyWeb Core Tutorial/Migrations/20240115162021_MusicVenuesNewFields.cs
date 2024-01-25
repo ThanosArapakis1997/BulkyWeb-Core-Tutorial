@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BulkyWeb_Core_Tutorial.Migrations
+namespace MGTConcerts.Migrations
 {
     /// <inheritdoc />
     public partial class MusicVenuesNewFields : Migration

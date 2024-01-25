@@ -1,6 +1,6 @@
-﻿using BulkyWeb_Core_Tutorial.Models;
+﻿using MGTConcerts.Models;
 
-namespace BulkyWeb_Core_Tutorial.Repository
+namespace MGTConcerts.Repository
 {
     public interface IMusicVenueRepository : IRepository<MusicVenue>
     {

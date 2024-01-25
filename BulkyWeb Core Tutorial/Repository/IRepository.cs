@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BulkyWeb_Core_Tutorial.Repository
+namespace MGTConcerts.Repository
 {
     public interface IRepository<T> where T : class
     {

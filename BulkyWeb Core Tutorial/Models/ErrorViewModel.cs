@@ -1,4 +1,4 @@
-namespace BulkyWeb_Core_Tutorial.Models
+namespace MGTConcerts.Models
 {
     public class ErrorViewModel
     {
