@@ -1,4 +1,5 @@
 using BulkyWeb_Core_Tutorial.Data;
+using BulkyWeb_Core_Tutorial.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options=> 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddScoped<IMusicVenueRepository, MusicVenueRepository>();
 
 var app = builder.Build();
 

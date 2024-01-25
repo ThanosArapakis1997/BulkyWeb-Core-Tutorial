@@ -1,19 +1,20 @@
 ﻿using BulkyWeb_Core_Tutorial.Data;
 using BulkyWeb_Core_Tutorial.Models;
+using BulkyWeb_Core_Tutorial.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyWeb_Core_Tutorial.Controllers
 {
     public class MusicVenueController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public MusicVenueController(ApplicationDbContext db)
+        private readonly IMusicVenueRepository musicVenueRepository;
+        public MusicVenueController(IMusicVenueRepository db)
         {
-            _db = db;
+            musicVenueRepository = db;
         }
         public IActionResult Index()
         {
-            List<MusicVenue> MusicVenueList = _db.Music_Venues.ToList();
+            List<MusicVenue> MusicVenueList = musicVenueRepository.GetAll().ToList();
             return View(MusicVenueList);
         }
 
@@ -45,8 +46,8 @@ namespace BulkyWeb_Core_Tutorial.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Music_Venues.Add(obj);
-                _db.SaveChanges();
+                musicVenueRepository.Add(obj);
+                musicVenueRepository.Save();
                 return RedirectToAction("Index");
             }
             return View();
@@ -59,7 +60,7 @@ namespace BulkyWeb_Core_Tutorial.Controllers
             {
                 return NotFound();
             }
-            MusicVenue mv = _db.Music_Venues.Find(id);
+            MusicVenue mv = musicVenueRepository.Get(u => u.Id == id);
             if (mv == null)
             {
                 return NotFound();
@@ -89,8 +90,8 @@ namespace BulkyWeb_Core_Tutorial.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.Music_Venues.Update(obj);
-                _db.SaveChanges();
+                musicVenueRepository.Update(obj);
+                musicVenueRepository.Save();
                 return RedirectToAction("Index");
             }
             return View();
@@ -104,7 +105,7 @@ namespace BulkyWeb_Core_Tutorial.Controllers
             {
                 return NotFound();
             }
-            MusicVenue mv = _db.Music_Venues.Find(id);
+            MusicVenue mv = musicVenueRepository.Get(u => u.Id == id);
             if (mv == null)
             {
                 return NotFound();
@@ -115,8 +116,8 @@ namespace BulkyWeb_Core_Tutorial.Controllers
         [HttpPost]
         public IActionResult Delete(MusicVenue obj)
         {
-            _db.Music_Venues.Remove(obj);
-            _db.SaveChanges();
+            musicVenueRepository.Remove(obj);
+            musicVenueRepository.Save();
             return RedirectToAction("Index");         
         }
     }
