@@ -7,14 +7,14 @@ namespace MGTConcerts.Controllers
 {
     public class MusicVenueController : Controller
     {
-        private readonly IMusicVenueRepository musicVenueRepository;
-        public MusicVenueController(IMusicVenueRepository db)
+        private readonly IUnitOfWork unitOfWork;
+        public MusicVenueController(IUnitOfWork _unitOfWork)
         {
-            musicVenueRepository = db;
+            unitOfWork = _unitOfWork;
         }
         public IActionResult Index()
         {
-            List<MusicVenue> MusicVenueList = musicVenueRepository.GetAll().ToList();
+            List<MusicVenue> MusicVenueList = unitOfWork.MusicVenue.GetAll().ToList();
             return View(MusicVenueList);
         }
 
@@ -46,8 +46,8 @@ namespace MGTConcerts.Controllers
 
             if (ModelState.IsValid)
             {
-                musicVenueRepository.Add(obj);
-                musicVenueRepository.Save();
+                unitOfWork.MusicVenue.Add(obj);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View();
@@ -60,7 +60,7 @@ namespace MGTConcerts.Controllers
             {
                 return NotFound();
             }
-            MusicVenue mv = musicVenueRepository.Get(u => u.Id == id);
+            MusicVenue mv = unitOfWork.MusicVenue.Get(u => u.Id == id);
             if (mv == null)
             {
                 return NotFound();
@@ -90,8 +90,8 @@ namespace MGTConcerts.Controllers
 
             if (ModelState.IsValid)
             {
-                musicVenueRepository.Update(obj);
-                musicVenueRepository.Save();
+                unitOfWork.MusicVenue.Update(obj);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View();
@@ -105,7 +105,7 @@ namespace MGTConcerts.Controllers
             {
                 return NotFound();
             }
-            MusicVenue mv = musicVenueRepository.Get(u => u.Id == id);
+            MusicVenue mv = unitOfWork.MusicVenue.Get(u => u.Id == id);
             if (mv == null)
             {
                 return NotFound();
@@ -116,8 +116,8 @@ namespace MGTConcerts.Controllers
         [HttpPost]
         public IActionResult Delete(MusicVenue obj)
         {
-            musicVenueRepository.Remove(obj);
-            musicVenueRepository.Save();
+            unitOfWork.MusicVenue.Remove(obj);
+            unitOfWork.Save();
             return RedirectToAction("Index");         
         }
     }
