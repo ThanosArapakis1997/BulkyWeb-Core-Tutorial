@@ -3,8 +3,9 @@ using MGTConcerts.Models;
 using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MGTConcerts.Controllers
+namespace MGTConcerts.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class MusicVenueController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -26,7 +27,7 @@ namespace MGTConcerts.Controllers
         [HttpPost]
         public IActionResult Create(MusicVenue obj)
         {
-            if (String.IsNullOrEmpty(obj.Name))
+            if (string.IsNullOrEmpty(obj.Name))
             {
                 ModelState.AddModelError("name", "Θα πρέπει να συμπληρώσετε Όνομα");
             }
@@ -37,12 +38,12 @@ namespace MGTConcerts.Controllers
             }
             else
             {
-                if(obj.AvailableFrom.Value > obj.AvailableTo.Value)
+                if (obj.AvailableFrom.Value > obj.AvailableTo.Value)
                 {
                     ModelState.AddModelError(string.Empty, "Η Ημερομηνία Εναρξης Διαθεσιμότητας δεν μπορεί να είναι μικρότερη της Ημερομηνίας Λήξης της Διαθεσιμότητας");
                 }
             }
-                    
+
 
             if (ModelState.IsValid)
             {
@@ -71,7 +72,7 @@ namespace MGTConcerts.Controllers
         [HttpPost]
         public IActionResult Update(MusicVenue obj)
         {
-            if (String.IsNullOrEmpty(obj.Name))
+            if (string.IsNullOrEmpty(obj.Name))
             {
                 ModelState.AddModelError("name", "Θα πρέπει να συμπληρώσετε Όνομα");
             }
@@ -118,7 +119,7 @@ namespace MGTConcerts.Controllers
         {
             unitOfWork.MusicVenue.Remove(obj);
             unitOfWork.Save();
-            return RedirectToAction("Index");         
+            return RedirectToAction("Index");
         }
     }
 }
