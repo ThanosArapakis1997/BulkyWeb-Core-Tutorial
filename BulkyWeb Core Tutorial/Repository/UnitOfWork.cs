@@ -7,9 +7,9 @@ namespace MGTConcerts.Repository
         private ApplicationDbContext _db;
         public IMusicVenueRepository MusicVenue { get; private set; }
 
-
-        //public ICompanyRepository Company { get; private set; }
-        //public IProductRepository Product { get; private set; }
+        public IArtistRepository Artist { get; private set; }
+        
+        public IConcertRepository Concert { get; private set; }
         //public IShoppingCartRepository ShoppingCart { get; private set; }
         //public IApplicationUserRepository ApplicationUser { get; private set; }
         //public IOrderHeaderRepository OrderHeader { get; private set; }
@@ -20,7 +20,8 @@ namespace MGTConcerts.Repository
         {
             _db = db;
             MusicVenue = new MusicVenueRepository(_db);
-            
+            Artist = new ArtistRepository(_db);
+            Concert = new ConcertRepository(_db);
         }
 
         public void Save()

@@ -404,9 +404,6 @@ code {
     word-wrap: break-word;
 }
 
-a > code {
-    color: inherit;
-}
 
 kbd {
     padding: 0.1875rem 0.375rem;

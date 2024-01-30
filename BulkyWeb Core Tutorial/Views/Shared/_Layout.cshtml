@@ -19,6 +19,24 @@
             border-collapse: collapse;
             margin-top: 20px;
         }
+        a{
+            color: black;
+        }
+
+
+        .panel{
+            margin:200px;
+            width:300px;
+            height: 300px;
+            margin-top: 100px;
+            margin-left: 100px;
+            box-sizing:border-box;
+            background-color: black;
+            color:#fff;
+            border-radius:6px;
+            display: block;
+            text-decoration: none;
+        }
 
         th, td {
             border: 1px solid #ddd;
@@ -33,14 +51,14 @@
 
         tr:nth-child(even) {
             background-color: #f2f2f2;
-        }
+        }      
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MGTConcerts</a>
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">MGTConcerts</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -51,9 +69,14 @@
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="MusicVenue" asp-action="Index">Χώροι Συναυλιών</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="MusicVenue" asp-action="Index">Χώροι Συναυλιών</a>
                           </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Artist" asp-action="Index">Καλλιτέχνες</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Concert" asp-action="Index">Συναυλίες</a>
+                        </li>
                     </ul>
                 </div>
             </div>

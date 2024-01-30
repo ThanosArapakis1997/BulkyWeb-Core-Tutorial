@@ -1,0 +1,68 @@
+﻿@model Artist
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Ενημέρωση Καλλιτέχνη</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="Id" hidden />
+
+            <div class="border p-3">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2">Όνομα</label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input type="file" name="file" class="form-control border-0 shadow" />
+                    <label asp-for="ImageUrl" class="ms-2">Φωτογραφία</label>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Αποθήκευση</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-area="Admin" asp-controller="Artist" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                            Επιστροφή στη Λίστα
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ΗΜΕΡΟΜΗΝΙΑ ΣΥΝΑΥΛΙΑΣ </th>
+                        <th>ΧΩΡΟΣ</th>
+                        <th>ΤΙΜΗ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Concerts != null)
+                    {
+                        @foreach (var obj in ViewBag.Concerts)
+                        {
+                            <tr>
+                                <td>@obj.ConcertDate</td>
+                                <td>@obj.MusicVenue.Name</td>
+                                <td>@obj.Price</td>                               
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

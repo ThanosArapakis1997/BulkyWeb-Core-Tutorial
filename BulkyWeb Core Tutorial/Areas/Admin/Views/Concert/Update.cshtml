@@ -1,0 +1,54 @@
+﻿@model Concert
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Ενημέρωση Συναυλίας</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <div class="border p-3">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ConcertDate" class="form-control border-0 shadow" />
+                    <label asp-for="ConcertDate" class="ms-2">Ημερομηνία Συναυλίας</label>
+                    <span asp-validation-for="ConcertDate" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="MusicVenueId" asp-items="@ViewBag.MusicVenues" class="form-select border-0 shadow">
+                    </select>
+                    <label asp-for="MusicVenueId" class="ms-2">Χώρος Συναυλίας</label>
+                    <span asp-validation-for="MusicVenueId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Price" class="form-control border-0 shadow" />
+                    <label asp-for="Price" class="ms-2">Τιμή</label>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="ArtistId" asp-items="@ViewBag.Artists" class="form-select border-0 shadow">
+                    </select>
+                    <label asp-for="ArtistId" class="ms-2">Καλλιτέχνης'</label>
+                    <span asp-validation-for="ArtistId" class="text-danger"></span>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Αποθήκευση</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-area="Admin" asp-controller="Concert" asp-action="Index" class="btn btn-secondary border  form-control">
+                            Επιστροφή στη Λίστα
+                        </a>
+                    </div>
+                </div>
+            </form>
+            </div>                           
+ </div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

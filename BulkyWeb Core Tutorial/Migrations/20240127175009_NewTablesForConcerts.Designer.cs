@@ -4,6 +4,7 @@ using MGTConcerts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MGTConcerts.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127175009_NewTablesForConcerts")]
+    partial class NewTablesForConcerts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +32,6 @@ namespace MGTConcerts.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -70,6 +70,29 @@ namespace MGTConcerts.Migrations
                     b.HasIndex("MusicVenueId");
 
                     b.ToTable("Concerts");
+                });
+
+            modelBuilder.Entity("MGTConcerts.Models.ConcertImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArtistId")
+                        .IsUnique();
+
+                    b.ToTable("ConcertImage");
                 });
 
             modelBuilder.Entity("MGTConcerts.Models.MusicVenue", b =>
@@ -125,9 +148,22 @@ namespace MGTConcerts.Migrations
                     b.Navigation("MusicVenue");
                 });
 
+            modelBuilder.Entity("MGTConcerts.Models.ConcertImage", b =>
+                {
+                    b.HasOne("MGTConcerts.Models.Artist", "Artist")
+                        .WithOne("Image")
+                        .HasForeignKey("MGTConcerts.Models.ConcertImage", "ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+                });
+
             modelBuilder.Entity("MGTConcerts.Models.Artist", b =>
                 {
                     b.Navigation("Concerts");
+
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

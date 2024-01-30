@@ -1,4 +1,5 @@
 using MGTConcerts.Models;
+using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,15 +9,18 @@ namespace MGTConcerts.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork _unitOfWork)
         {
+            unitOfWork = _unitOfWork;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Artist> ArtistList = unitOfWork.Artist.GetAll(includeProperties: "Concerts").ToList();
+            return View(ArtistList);
         }
 
         public IActionResult Privacy()

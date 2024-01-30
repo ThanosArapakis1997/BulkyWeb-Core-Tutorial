@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MGTConcerts.Models
 {
     public class MusicVenue
-    {
+    {        
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -20,7 +20,9 @@ namespace MGTConcerts.Models
             {
                 if (AvailableFrom != null && AvailableTo != null)
                 {
-                    return AvailableFrom.Value.Date.ToString() + " - " + AvailableTo.Value.Date.ToString();
+                    return AvailableFrom.Value.Day.ToString() + "/" +
+                           AvailableFrom.Value.Month.ToString() + " - " + AvailableTo.Value.Day.ToString() + "/" +
+                           AvailableTo.Value.Month.ToString();
                 }
                 return null;
             }
