@@ -1,15 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MGTConcerts.Models
 {
     public class Concert
     {
         public int Id { get; set; }
+
+        [Required]
+        public string? ConcertName { get; set; }
+
         public int ArtistId { get; set; }
         [ForeignKey("ArtistId")]
         [ValidateNever]
+        [JsonIgnore]
         public Artist? Artist { get; set; }
         public string? ArtistName
         {
@@ -32,13 +38,5 @@ namespace MGTConcerts.Models
         [ForeignKey("MusicVenueId")]
         [ValidateNever]
         public MusicVenue? MusicVenue { get; set; }
-        public string? VenueName
-        {
-            get
-            {
-                if (MusicVenue != null) return MusicVenue.Name;
-                return "";
-            }
-        }
     }
 }

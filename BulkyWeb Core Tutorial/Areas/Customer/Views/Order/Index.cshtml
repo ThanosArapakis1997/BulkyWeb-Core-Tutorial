@@ -11,12 +11,19 @@
 </head>
 <body>
     <div class="card shadow border-0 mt-4">
-        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+          <img id="PageContent_PlayDetails_PlayImage" class="fadeShow preload" src=@Model.ImageUrl>
+        </div>
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">           
             <div class="row">
                 <div class="col-12 text-center">
                     <h2 class="text-white py-2">Συναυλίες του Καλλιτέχνη @Model.Name</h2>
                 </div>
             </div>
+        </div>
+        <h3 style="text-decoration:underline; padding-left:30px;">Πληροφορίες για τον Καλλιτέχνη</h3>
+        <div>
+            <p style="padding-left:30px; padding-right:20px">@Model.Biography</p>
         </div>
         <div class="card-body p-4">
             <form method="post" class="row" enctype="multipart/form-data">

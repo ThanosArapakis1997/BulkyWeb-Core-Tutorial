@@ -113,40 +113,32 @@ namespace MGTConcerts.Areas.Admin.Controllers
 
         }
 
+        #region API CALLS
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Artist> ArtistList = unitOfWork.Artist.GetAll(includeProperties: "Concerts").ToList();
+            return Json(new { data = ArtistList });
+        }
+
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var artistToBeDeleted = unitOfWork.Artist.Get(u => u.Id == id);
+            if (artistToBeDeleted == null)
             {
-                return NotFound();
-            }
-            Artist mv = unitOfWork.Artist.Get(u => u.Id == id);
-            if (mv == null)
-            {
-                return NotFound();
-            }
-            return View(mv);
-        }
-
-        [HttpPost]
-        public IActionResult Delete(Artist obj)
-        {
-            List<Concert> ArtistConcerts = unitOfWork.Concert.GetAll(u => u.ArtistId == obj.Id).ToList();
-
-            if (ArtistConcerts != null)
-            {
-                if(ArtistConcerts.Count > 0)
-                {
-                    ModelState.AddModelError("", "Ο Καλλιτέχνης έχει συναυλίες στο προσεχές διάστημα. Δεν μπορείτε να τον διαγράψετε");
-                    return View();
-                }
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
-            unitOfWork.Artist.Remove(obj);
+
+            unitOfWork.Artist.Remove(artistToBeDeleted);
             unitOfWork.Save();
-            return RedirectToAction("Index");
-            
+
+            return Json(new { success = true, message = "Delete Successful" });
         }
+        #endregion
 
     }
 }

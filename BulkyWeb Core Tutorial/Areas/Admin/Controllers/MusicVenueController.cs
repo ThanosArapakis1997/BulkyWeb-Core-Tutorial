@@ -99,27 +99,31 @@ namespace MGTConcerts.Areas.Admin.Controllers
 
         }
 
+        #region API CALLS
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<MusicVenue> VenueList = unitOfWork.MusicVenue.GetAll().ToList();
+            return Json(new { data = VenueList });
+        }
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var venueToBeDeleted = unitOfWork.MusicVenue.Get(u => u.Id == id);
+            if (venueToBeDeleted == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
-            MusicVenue mv = unitOfWork.MusicVenue.Get(u => u.Id == id);
-            if (mv == null)
-            {
-                return NotFound();
-            }
-            return View(mv);
-        }
 
-        [HttpPost]
-        public IActionResult Delete(MusicVenue obj)
-        {
-            unitOfWork.MusicVenue.Remove(obj);
+
+            unitOfWork.MusicVenue.Remove(venueToBeDeleted);
             unitOfWork.Save();
-            return RedirectToAction("Index");
+
+            return Json(new { success = true, message = "Delete Successful" });
         }
+        #endregion
+
     }
 }

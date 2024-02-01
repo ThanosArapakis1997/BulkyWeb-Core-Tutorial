@@ -14,45 +14,23 @@
         <div class="row pt-4">
             <div class="col-4 text-start"><a asp-controller="MusicVenue" asp-action="Create" class="btn btn-primary">Νέος Χώρος</a></div>
         </div>
-    <table>
-        <thead>
-            <tr>
-                <th> ΟΝΟΜΑΣΙΑ ΧΩΡΟΥ</th>
-                <th>ΤΟΠΟΘΕΣΙΑ</th>
-                <th>ΧΩΡΗΤΙΚΟΤΗΤΑ</th>
-                <th>ΠΕΡΙΓΡΑΦΗ</th>
-                 <th>ΔΙΑΘΕΣΙΜΟ</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>  
-        <tbody>
-            @foreach (var obj in Model){
+        <table id="tblData" style="width:100%">
+            <thead>
                 <tr>
-                    <td>@obj.Name</td>
-                    <td>@obj.Location</td>
-                    <td>@obj.Capacity</td>
-                    <td>@obj.Description</td>
-                    <td>@obj.AvailablePeriod</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-action="Update" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square">Ενημέρωση</i>
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                     <i class="bi bi-trash-fill">Διαγραφή </i>
-                                </a>
-                            </div>
-                        </td>
+                    <th>ΟΝΟΜΑΣΙΑ ΧΩΡΟΥ</th>
+                    <th>ΤΟΠΟΘΕΣΙΑ</th>
+                    <th>ΧΩΡΗΤΙΚΟΤΗΤΑ</th>
+                    <th>ΠΕΡΙΓΡΑΦΗ</th>
+                    <th>ΔΙΑΘΕΣΙΜΟ</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>         
+        </table>
     </div>
 
 </body>
 </html>
+
+@section Scripts{
+    <script src="~/js/MusicVenue.js"></script>
+}

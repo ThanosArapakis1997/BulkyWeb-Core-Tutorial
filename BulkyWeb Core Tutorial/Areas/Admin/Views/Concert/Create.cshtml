@@ -12,9 +12,13 @@
         <form method="post" class="row">
             <div class="border p-3">
                 <div asp-validation-summary="ModelOnly"></div>
-                
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="ConcertDate" class="form-control border-0 shadow" />
+                    <input asp-for="ConcertName" class="form-control border-0 shadow" />
+                    <label asp-for="ConcertName" class="ms-2">Τίτλος Συναυλίας</label>
+                    <span asp-validation-for="ConcertName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ConcertDate" type="date" class="form-control border-0 shadow" />
                     <label asp-for="ConcertDate" class="ms-2">Ημερομηνία Συναυλίας</label>
                     <span asp-validation-for="ConcertDate" class="text-danger"></span>
                 </div>

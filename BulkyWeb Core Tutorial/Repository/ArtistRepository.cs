@@ -11,34 +11,7 @@ namespace MGTConcerts.Repository
         public ArtistRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
-        }
-
-        public void AddConcert(Concert concert)
-        {
-            if (concert == null)
-            {
-                Artist artist = _db.Artists.FirstOrDefault(u => u.Id == concert.ArtistId);
-                if(artist != null) 
-                {
-                    artist.Concerts.Add(concert);
-                    _db.SaveChanges();
-                }
-            }
-
-        }
-
-        public void RemoveConcert(Concert concert)
-        {
-            if (concert == null)
-            {
-                Artist artist = _db.Artists.FirstOrDefault(u => u.Id == concert.ArtistId);
-                if (artist != null)
-                {
-                    artist.Concerts.Remove(concert);
-                    _db.SaveChanges();
-                }
-            }
-        }
+        }      
 
         public void Save()
         {

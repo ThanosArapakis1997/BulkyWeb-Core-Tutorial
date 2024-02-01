@@ -1,13 +1,16 @@
 ﻿using MGTConcerts.Models;
 using MGTConcerts.Repository;
 using MGTConcerts.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MGTConcerts.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    []
     public class ConcertController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -65,10 +68,14 @@ namespace MGTConcerts.Areas.Admin.Controllers
                 ModelState.AddModelError("ConcertDate","Η Ημερομηνία Συναυλίας είναι εκτός των ορίων διαθεσιμότητας του χώρου, τα οποία είναι: " +  Selectedmv.AvailablePeriod);
             }
 
+            if (String.IsNullOrEmpty(obj.ConcertName))
+            {
+                ModelState.AddModelError("ConcertName", "Θα πρέπει να συμπληρώσετε Τίτλο Συναυλίας");
+            }
+
             if (ModelState.IsValid)
             {
                 unitOfWork.Concert.Add(obj);
-                unitOfWork.Artist.AddConcert(obj);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
             }
@@ -130,6 +137,11 @@ namespace MGTConcerts.Areas.Admin.Controllers
                 ModelState.AddModelError("ConcertDate", "Η Ημερομηνία Συναυλίας είναι εκτός των ορίων διαθεσιμότητας του χώρου, τα οποία είναι: " + Selectedmv.AvailablePeriod);
             }
 
+            if (String.IsNullOrEmpty(obj.ConcertName))
+            {
+                ModelState.AddModelError("ConcertName", "Θα πρέπει να συμπληρώσετε Τίτλο Συναυλίας");
+            }
+
             if (ModelState.IsValid)
             {
                 unitOfWork.Concert.Update(obj);
@@ -154,28 +166,36 @@ namespace MGTConcerts.Areas.Admin.Controllers
 
         }
 
+        #region API CALLS
 
+        [HttpGet] 
+        public IActionResult GetAll() 
+        {
+            JsonSerializerOptions options = new()
+            {
+                WriteIndented = true
+            };
+            List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "Artist,MusicVenue").ToList();
+            return Json(new { data = ConcertList },new JsonSerializerOptions(options));
+        }
+
+        [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var concertToBeDeleted = unitOfWork.Concert.Get(u => u.Id == id);
+            if (concertToBeDeleted == null)
             {
-                return NotFound();
-            }
-            Concert mv = unitOfWork.Concert.Get(u => u.Id == id);
-            if (mv == null)
-            {
-                return NotFound();
-            }
-            return View(mv);
+                return Json(new { success = false, message = "Error while deleting" });
+            }                   
+
+
+            unitOfWork.Concert.Remove(concertToBeDeleted);
+            unitOfWork.Save();
+
+            return Json(new { success = true, message = "Delete Successful" });
         }
 
-        [HttpPost]
-        public IActionResult Delete(Concert obj)
-        {
-            unitOfWork.Concert.Remove(obj);
-            unitOfWork.Artist.RemoveConcert(obj);
-            unitOfWork.Save();
-            return RedirectToAction("Index");
-        }
+        #endregion
+
     }
 }
