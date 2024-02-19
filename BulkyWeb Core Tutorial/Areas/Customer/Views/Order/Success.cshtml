@@ -1,0 +1,44 @@
+﻿@model Order
+<div class="w3-panel w3-leftbar w3-sand w3-xxlarge w3-serif">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="text-white py-2">H ΚΡΑΤΗΣΗ ΣΑΣ ΕΓΙΝΕ ΕΠΙΤΥΧΩΣ</h1>
+                </div>
+            </div>
+        </div>
+        <div class="hsep5">
+               <div class="col-xs-6 col-sm-12" style="background-color:lavender;">
+                <h2 class="sp-header">@ViewBag.Concert.ConcertName</h2>
+                    <p>
+                        <b>Χώρος Συναυλίας </b> <input value="@ViewBag.Concert.MusicVenue.Name" disabled class="form-control border-0 shadow" />
+                    </p>
+                    <p><b>Ημ/νια Συναυλίας </b>: <input value="@ViewBag.Concert.ConcertDate" disabled class="form-control border-0 shadow" /></p>
+                    <p><b>Τύπος Είσητηρίου: </b> <input value="Κανονικό" disabled class="form-control border-0 shadow" /></p>
+                    <p><b>Τιμή: </b><input value="@ViewBag.Concert.Price" disabled class="form-control border-0 shadow" /></p>
+                    <p><b>Ονοματεπώνυμο: </b> <input value="@Model.Name  @Model.SurName" disabled class="form-control border-0 shadow" /></p>
+                    <p><b>Email: </b><input value="@Model.Email" disabled class="form-control border-0 shadow" /></p>
+
+                </div>          
+        </div>
+</div>
+<div>
+    <h2>Εισητήρια</h2>
+    <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow  border-top border-5 rounded" style="background-color:gray;">
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@ViewBag.Concert.ConcertName</p>
+                                <p class="card-title text-red text-center"><b>@ViewBag.Concert.ConcertDateStr</b></p>
+                            </div>
+                            <div>
+                                <a asp-controller="Order" asp-action="PrintToPDF" asp-route-id="@Model.Id" class="btn btn-primary bg-gradient border-0 form-control"> 
+                                    Εκτύπωση Εισητηρίου
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

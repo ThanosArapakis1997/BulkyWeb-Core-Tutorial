@@ -24,7 +24,7 @@ function loadDataTable() {
                 "width": "25%"
             }
         ]
-    }); d
+    }); 
 }
 
 function Delete(url) {

@@ -2,33 +2,59 @@
     ViewData["Title"] = "Home Page";
 }
 @model List<Artist>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<body style="background-color:black">
+    <div class='container' style="background-color:black; top:50px; width:3000px;">
+        <div class='slick-slider' style="width:1100px;">
+            @foreach (var concert in ViewBag.ConcertList)
+            {
+                <div class="slick-track">
+                    <div class="slick-slide">
+                        <a class="panel" asp-controller="Order" asp-action="Create" asp-route-id="@concert.Id">
+                            <div class="card border-0 p-3 shadow" style="background-color: black; width:inherit;">
+                                <img src="@concert.ImageUrl" class="card-img-top rounded" style="width:550px; height:400px; background-image: url(@concert.ImageUrl); background-repeat: no-repeat;">
+                                @*<div class="card-body pb-0">
+                                    <div class="pl-1">
+                                        <p class="card-title h5 text-green opacity-75 text-uppercase text-center">@concert.ConcertName</p>
+                                        @if (concert.ConcertDateStr != null)
+                                        {
+                                        <p class="card-title text-warning text-center"><b>@concert.ConcertDateStr</b></p>
+                                        }
+                                    </div>                                                   
+                                </div>*@
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome Boyz</h1>
-</div>
-
-<table>
-    <thead>
-        <tr>
-            <th>ΚΑΛΛΙΤΕΧΝΕΣ</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
+            }
+        </div>
+    </div>
+    <div class="row pb-3">
+        @foreach (var artist in Model)
         {
-
-            <tr>
-                <td>
-                    <a class="panel" asp-controller="Order" asp-action="Index" asp-route-id="@obj.Id" style="background-image: url(@obj.ImageUrl); background-size: cover; background-position: center; background-repeat: no-repeat;">
-                        <h2 style="text-align: center;">@obj.Name</h2>                        
-                    </a>
-                </td>
-                <td>
-                    <p style="text-decoration:underline">Εμφανίσεις</p>
-                    <p>@obj.Period</p>
-                </td>
-            </tr>
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow  border-top border-5 rounded" style="background-color:gray;">
+                            <div class="card-body pb-0">
+                                <img src="@artist.ImageUrl" class="card-img-top rounded"/>                                                                                
+                            </div>
+                            <div class="pl-1">
+                                <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@artist.Name</p>
+                                <p class="card-title text-red text-center"><b>@artist.Period</b></p>
+                            </div>
+                            <div>
+                                <a asp-controller="Order" asp-action="Index" asp-route-id="@artist.Id"
+                                class="btn btn-primary bg-gradient border-0 form-control"> 
+                                    Πληροφορίες
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</body>

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.Words" Version="24.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.15">
@@ -29,6 +30,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\artist\" />
+    <Folder Include="wwwroot\images\concert\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Templates\OrderTemplate.docx" />
   </ItemGroup>
 
 </Project>

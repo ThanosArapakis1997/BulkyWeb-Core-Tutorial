@@ -9,7 +9,7 @@
     </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" enctype="multipart/form-data">
             <div class="border p-3">
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-floating py-2 col-12">
@@ -40,6 +40,11 @@
                     </select>
                     <label asp-for="ArtistId" class="ms-2">Καλλιτέχνης</label>
                     <span asp-validation-for="ArtistId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input type="file" name="file" class="form-control border-0 shadow" />
+                    <label asp-for="ImageUrl" class="ms-2">Φωτογραφία</label>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">

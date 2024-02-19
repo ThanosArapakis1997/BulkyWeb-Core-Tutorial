@@ -23,6 +23,30 @@
     max-width: 540px;
   }
 }
+
+.slick-slide {
+    text-align: center;
+    color: #419be0;
+    background: white;
+}
+
+.slick-disabled {
+    cursor: not-allowed;
+}
+
+.navigation-item {
+    display: none;
+}
+
+    .navigation-item .slick-track {
+        min-width: 100%;
+    }
+
+@media screen and (min-width: 796px) {
+    .navigation-item {
+        display: block;
+    }
+}
 @media (min-width: 768px) {
   .container-md, .container-sm, .container {
     max-width: 720px;

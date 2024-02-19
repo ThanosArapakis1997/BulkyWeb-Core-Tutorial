@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@model List<Concert>
+<head>
+    <title>Concerts</title>
+</head>
+
+<div class="row pb-3">
+    @foreach (var concert in Model)
+    {
+        <div class="col-lg-3 col-sm-6">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card border-0 p-3 shadow  border-top border-5 rounded" style="background-color:gray;">
+                        <div class="card-body pb-0">
+                            <img src="@concert.ImageUrl" class="card-img-top rounded" />
+                        </div>
+                        <div class="pl-1">
+                            <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@concert.ConcertName</p>
+                            <p class="card-title text-red text-center"><b>@concert.ConcertDateStr</b></p>
+                        </div>
+                        <div>
+                            <a asp-controller="Order" asp-action="Index" asp-route-id="@concert.Id"
+                           class="btn btn-primary bg-gradient border-0 form-control">
+                                Κρατήσεις
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

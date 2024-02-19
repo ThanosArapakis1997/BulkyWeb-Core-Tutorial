@@ -20,6 +20,8 @@ namespace MGTConcerts.Areas.Customer.Controllers
         public IActionResult Index()
         {
             List<Artist> ArtistList = unitOfWork.Artist.GetAll(includeProperties: "Concerts").ToList();
+            List<Concert> ConcertList = unitOfWork.Concert.GetAll().ToList();
+            ViewBag.ConcertList= ConcertList;
             return View(ArtistList);
         }
 

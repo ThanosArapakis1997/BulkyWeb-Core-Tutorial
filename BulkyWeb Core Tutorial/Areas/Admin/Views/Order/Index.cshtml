@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@model List<Order>
+<head>
+    <title>Orders</title>
+</head>
+
+<body>
+
+    <header>
+        <h2>Κρατήσεις</h2>
+    </header>
+    <div class="container">
+        <table class="ws-table-all w3-bordered w3-striped w3-border test w3-hoverable" style="width:fit-content;">
+            <thead>
+                <tr>
+                    <th>ΟΝΟΜΑ</th>
+                    <th>ΕΠΩΝΥΜΟ</th>
+                    <th>ΤΗΛΕΦΩΝΟ</th>
+                    <th>EMAIL</th>
+                    <th>ΣΥΝΑΥΛΙΑ</th>
+                    <th>ΗΜ/ΝΙΑ ΣΥΝΑΥΛΙΑΣ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.Name</td>
+                            <td>@obj.SurName</td>
+                            <td>@obj.Phone</td>
+                            <td>@obj.Email</td>
+                            <td>@obj.Concert.ConcertName</td>
+                            <td>@obj.Concert.ConcertDate</td>                              
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

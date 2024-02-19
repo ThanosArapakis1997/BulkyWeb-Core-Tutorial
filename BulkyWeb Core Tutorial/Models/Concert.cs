@@ -26,9 +26,26 @@ namespace MGTConcerts.Models
             }
         }
             
-
         [Required]
         public DateTime? ConcertDate { get; set; }
+
+        public string? ConcertDateStr
+        {
+            get
+            {
+                if (ConcertDate != null)
+                {
+
+
+                    return ConcertDate.Value.Day.ToString() + "/" +
+                        ConcertDate.Value.Month.ToString() + "/" +
+                        ConcertDate.Value.Year.ToString();
+                       
+                        
+                }
+                return null;
+            }
+        }
 
         [Required]
         [Range(1, 1000)]
@@ -38,5 +55,8 @@ namespace MGTConcerts.Models
         [ForeignKey("MusicVenueId")]
         [ValidateNever]
         public MusicVenue? MusicVenue { get; set; }
+
+        [ValidateNever]
+        public string? ImageUrl { get; set; }
     }
 }

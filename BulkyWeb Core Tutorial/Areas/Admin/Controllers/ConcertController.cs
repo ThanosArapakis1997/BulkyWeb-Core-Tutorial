@@ -14,9 +14,12 @@ namespace MGTConcerts.Areas.Admin.Controllers
     public class ConcertController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
-        public ConcertController(IUnitOfWork _unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ConcertController(IUnitOfWork _unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             unitOfWork = _unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -59,7 +62,7 @@ namespace MGTConcerts.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Concert obj)
+        public IActionResult Create(Concert obj, IFormFile file)
         {
             MusicVenue Selectedmv = unitOfWork.MusicVenue.Get(u => u.Id == obj.MusicVenueId);
 
@@ -75,6 +78,18 @@ namespace MGTConcerts.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string artistpath = Path.Combine(wwwRootPath, @"images/concert");
+
+                    using (var filestream = new FileStream(Path.Combine(artistpath, filename), FileMode.Create))
+                    {
+                        file.CopyTo(filestream);
+                    };
+                    obj.ImageUrl = @"images/concert/" + filename;
+                }
                 unitOfWork.Concert.Add(obj);
                 unitOfWork.Save();
                 return RedirectToAction("Index");
@@ -128,7 +143,7 @@ namespace MGTConcerts.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Concert obj)
+        public IActionResult Update(Concert obj, IFormFile file)
         {
             MusicVenue Selectedmv = unitOfWork.MusicVenue.Get(u => u.Id == obj.MusicVenueId);
 
@@ -144,6 +159,18 @@ namespace MGTConcerts.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
+                {
+                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string artistpath = Path.Combine(wwwRootPath, @"images/concert");
+
+                    using (var filestream = new FileStream(Path.Combine(artistpath, filename), FileMode.Create))
+                    {
+                        file.CopyTo(filestream);
+                    };
+                    obj.ImageUrl = @"images/concert/" + filename;
+                }
                 unitOfWork.Concert.Update(obj);
                 unitOfWork.Save();
                 return RedirectToAction("Index");

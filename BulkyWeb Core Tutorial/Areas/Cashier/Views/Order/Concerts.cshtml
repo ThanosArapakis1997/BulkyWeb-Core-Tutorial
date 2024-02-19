@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@model List<Concert>
+<head>
+    <title>Concerts</title>
+</head>
+
+<body>
+
+    <header>
+        <h2>Συναυλίες</h2>
+    </header>
+    <div class="container">
+        <table id="tblData" class="ws-table-all w3-bordered w3-striped w3-border test w3-hoverable" style="width:100%">
+        <thead>
+            <tr>
+                <th>Τίτλος Συναυλίας</th>
+                <th>Καλλιτέχνης</th>
+                <th>Ημερομηνία</th>
+                <th>Χώρος</th>
+                <th>Τιμή</th>
+                <th></th>
+            </tr>
+        </thead>
+        </table>
+
+    </div>
+</body>
+</html>
+
+@section Scripts{    
+            <script src="~/js/OrderConcert.js"></script>
+}
