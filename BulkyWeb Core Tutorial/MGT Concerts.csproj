@@ -11,16 +11,12 @@
   <ItemGroup>
     <Compile Remove="Areas\Admin\images\**" />
     <Compile Remove="Areas\Admin\NewFolder\**" />
-    <Compile Remove="Controllers\**" />
     <Content Remove="Areas\Admin\images\**" />
     <Content Remove="Areas\Admin\NewFolder\**" />
-    <Content Remove="Controllers\**" />
     <EmbeddedResource Remove="Areas\Admin\images\**" />
     <EmbeddedResource Remove="Areas\Admin\NewFolder\**" />
-    <EmbeddedResource Remove="Controllers\**" />
     <None Remove="Areas\Admin\images\**" />
     <None Remove="Areas\Admin\NewFolder\**" />
-    <None Remove="Controllers\**" />
   </ItemGroup>
 
   <ItemGroup>
