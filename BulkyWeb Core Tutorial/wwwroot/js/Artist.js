@@ -10,7 +10,13 @@ function loadDataTable() {
         "columns": [
             { data: 'name', "width": "20%" },
             { data: 'biography', "width": "35%" },
-            { data: 'imageUrl', "width": "10%" },
+            {
+                data: 'imageUrl',
+                "render": function (data) {
+                    return '<img src="' + data + '" alt="Image"/>';
+                },
+                "width": "10%"
+            },
             { data: 'period', "width": "10%" },
             {
                 data: 'id',
@@ -23,7 +29,7 @@ function loadDataTable() {
                 "width": "25%"
             }
         ]
-    }); d
+    }); 
 }
 
 function Delete(url) {
