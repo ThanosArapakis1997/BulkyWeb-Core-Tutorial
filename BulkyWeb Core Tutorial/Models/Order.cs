@@ -30,7 +30,8 @@ namespace MGTConcerts.Models
         [ForeignKey("ConcertId")]
         [ValidateNever]
         public Concert? Concert { get; set; }
-
+        public string? SessionId { get; set; }
+        public string? PaymentIntentId { get; set; }
         public Boolean Present { get; set; }
 
         public DataSet GetPrintingDataSet(string[] fields, IUnitOfWork uow)

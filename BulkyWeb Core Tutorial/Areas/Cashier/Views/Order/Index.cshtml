@@ -12,7 +12,6 @@
     </header>
     <div class="container">
         <form method="post" id="addPresentsForm">
-        <input type="hidden" id="ordersJson" name="ordersJson" />
         <table class="ws-table-all w3-bordered w3-striped w3-border test w3-hoverable" style="width:fit-content;">
             <thead>
                 <tr>
@@ -38,14 +37,7 @@
                             <td>@obj.Concert.ConcertName</td>
                             <td>@obj.Concert.ConcertDate</td>
                             <td>
-                                        <input asp-for="@obj.Present" type="checkbox" id="present-checkbox" class="present-checkbox" data-order-id="@obj.Id" />
-                                        <input type="hidden" name="order-id" value="@obj.Id" />
-                                        <input type="hidden" name="order-id" value="@obj.Id" />
-                                        <input type="hidden" name="order-name" value="@obj.Name" />
-                                        <input type="hidden" name="order-surname" value="@obj.SurName" />
-                                        <input type="hidden" name="order-phone" value="@obj.Phone" />
-                                        <input type="hidden" name="order-email" value="@obj.Email" />
-                                        <input type="hidden" name="order-concertId" value="@obj.ConcertId" />
+                                <button type="submit" asp-action="AddPresents" asp-route-id="@obj.Id" class="btn btn-primary form-control">Παρών</button>
                             </td>
                         </tr>
                     }
@@ -64,18 +56,6 @@
 @section Scripts{
     <script>
         function addPresents() {
-            var orders = [];
-            $('.present-checkbox:checked').each(function () {
-                var orderId = $(this).data('order-id');
-                var Name = $(this).data('order-name');
-                var SurName = $(this).data('order-surname');
-                var Phone = $(this).data('order-phone');
-                var Email = $(this).data('order-email');
-                var ConcertId = $(this).data('order-concertId');
-                var present = $(this).prop('checked');
-                orders.push({ Id: orderId, Name: Name, SurName: SurName, Phone: Phone, Email: Email, ConcertId=ConcertId, Present: present});
-            });
-
             $.ajax({
                 type: 'POST',
                 url: '/Order/AddPresents',

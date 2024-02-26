@@ -12,15 +12,20 @@
 <body>
     <div class="card shadow border-0 mt-4">
         <div class="card-header bg-secondary bg-gradient ml-0 py-3">           
-            <div class="row">
+            <div class="row">               
                 <div class="col-12 text-center">
                     <h2 class="text-white py-2">Συναυλίες του Καλλιτέχνη @Model.Name</h2>
                 </div>
             </div>
         </div>
         <h3 style="text-decoration:underline; padding-left:30px;">Πληροφορίες για τον Καλλιτέχνη</h3>
-        <div>
-            <p style="padding-left:30px; padding-right:20px">@Model.Biography</p>
+        <div class="row">
+            <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+@*                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvmgVYEk22unyliOujnlAHxdQUFYllM80379Wv2evSvGkFcGDK" width="100%" class="card-img-top rounded" />
+ *@            </div>
+            <div>
+                <p style="padding-left:30px; padding-right:20px">@Model.Biography</p>
+            </div>
         </div>
         <div class="card-body p-4">
             <form method="post" class="row" enctype="multipart/form-data">
