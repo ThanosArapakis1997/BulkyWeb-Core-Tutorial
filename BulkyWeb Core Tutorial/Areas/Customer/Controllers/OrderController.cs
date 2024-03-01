@@ -6,6 +6,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Reflection;
 using MGTConcerts.Utilities;
 using Stripe.Checkout;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MGTConcerts.Areas.Customer.Controllers
 {
@@ -34,6 +35,17 @@ namespace MGTConcerts.Areas.Customer.Controllers
                 return NotFound();
             }
             List<Concert> Concerts = unitOfWork.Concert.GetAll(u => u.ArtistId == id, "Artist,MusicVenue").ToList();
+            foreach(Concert con in Concerts)
+            {
+                List<Order> Orders = unitOfWork.Order.GetAll(u => u.ConcertId == con.Id).ToList();
+                double availability = ((double)con.MusicVenue.Capacity - (double)Orders.Count) / (double)con.MusicVenue.Capacity *100;
+                if (availability < 30) con.ButtonColor = "red";
+                else if (availability >= 30 && availability <= 70) con.ButtonColor = "orange";
+                else con.ButtonColor = "green";
+                unitOfWork.Concert.Update(con);
+                unitOfWork.Save();
+            }
+
             ViewBag.Concerts = Concerts;
 
             return View(mv);
