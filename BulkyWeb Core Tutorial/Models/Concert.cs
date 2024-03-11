@@ -25,7 +25,9 @@ namespace MGTConcerts.Models
                 return "";
             }
         }
-            
+
+        public string? ButtonColor { get; set;}
+        
         [Required]
         public DateTime? ConcertDate { get; set; }
 

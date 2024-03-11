@@ -34,6 +34,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.1" />
 	<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
 	<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.2" />
+	<PackageReference Include="Stripe.net" Version="43.16.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -32,17 +32,15 @@ namespace MGTConcerts.Areas.Cashier.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPresents([FromBody] List<Order> orders)
+        public IActionResult AddPresents(int id)
         {
-            if (orders != null)
-            {
-                foreach (Order order in orders)
-                {
-                    unitOfWork.Order.Update(order);
-                }
-                unitOfWork.Save();
-            }
-            return Ok();
+            Order order = unitOfWork.Order.Get(u => u.Id == id);
+            order.Present = true;
+            TempData["success"] = "Η Κράτηση ενημερώθηκε επιτυχώς";
+            unitOfWork.Order.Update(order);
+            unitOfWork.Save();
+                                  
+            return Redirect($"/cashier/order/index?id={order.ConcertId}");
         }
 
         #region API CALLS
