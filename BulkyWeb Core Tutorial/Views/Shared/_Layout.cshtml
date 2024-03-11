@@ -161,6 +161,8 @@
                                 <li class="nav-item">
                                     <a class="drop-class" asp-area="Customer" asp-controller="Information" asp-action="Index">Πληροφορίες</a>
                                 </li>
+                            </ul>
+                        </li>
                         
                         @if (!User.IsInRole(SD.Role_Customer))
                         {
@@ -192,6 +194,7 @@
                                 </ul>
                             </li>
                         }
+
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>
