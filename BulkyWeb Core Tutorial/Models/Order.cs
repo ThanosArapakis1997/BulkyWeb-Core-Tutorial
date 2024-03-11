@@ -45,7 +45,7 @@ namespace MGTConcerts.Models
             DataTable orderTable = new ListtoDataTableConverter().ToDataTable(new List<Order>(new[] { this }), "PrintingObject", fields);
 
             // Fetch Concert data
-            List<string> concertFields = new List<string> { "Id", "ConcertName", "ConcertDate", "Price" };
+            List<string> concertFields = new List<string> { "Id", "ConcertName", "ConcertDate", "Price", "QRCode" };
             DataTable concertTable = new ListtoDataTableConverter().ToDataTable(new List<Concert> { con }, "Concert", concertFields.ToArray());
 
             // Add Order and Concert tables to the dataset

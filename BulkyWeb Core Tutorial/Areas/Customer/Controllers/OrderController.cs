@@ -45,7 +45,7 @@ namespace MGTConcerts.Areas.Customer.Controllers
                 unitOfWork.Concert.Update(con);
                 unitOfWork.Save();
             }
-
+            
             ViewBag.Concerts = Concerts;
 
             return View(mv);
