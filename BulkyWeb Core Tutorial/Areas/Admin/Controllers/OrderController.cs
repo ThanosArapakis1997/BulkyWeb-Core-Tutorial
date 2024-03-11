@@ -1,10 +1,13 @@
 ﻿using MGTConcerts.Models;
 using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Mvc;
+using MGTConcerts.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MGTConcerts.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class OrderController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

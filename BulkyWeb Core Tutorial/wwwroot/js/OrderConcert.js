@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/Admin/Concert/GetAll' },
+        "ajax": { url: '/Cashier/Order/GetAll' },
         "columns": [
             { data: 'ConcertName', "width": "20%" },
             { data: 'ArtistName', "width": "20%" },

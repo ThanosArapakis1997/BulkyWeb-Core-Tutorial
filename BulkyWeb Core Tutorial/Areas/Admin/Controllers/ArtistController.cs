@@ -2,10 +2,14 @@
 using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using MGTConcerts.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MGTConcerts.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class ArtistController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

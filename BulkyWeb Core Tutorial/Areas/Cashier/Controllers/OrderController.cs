@@ -1,10 +1,16 @@
 ﻿using MGTConcerts.Models;
 using MGTConcerts.Repository;
+using MGTConcerts.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace MGTConcerts.Areas.Cashier.Controllers
 {
     [Area("Cashier")]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Cashier)]
+    //[Authorize(Roles = SD.Role_Cashier)]
+
     public class OrderController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
@@ -42,12 +48,18 @@ namespace MGTConcerts.Areas.Cashier.Controllers
         #region API CALLS
 
         [HttpGet]
-        public IActionResult GetAll(int? id)
+        public IActionResult GetAll()
         {
-            List<Order> OrderList = unitOfWork.Order.GetAll(u =>u.ConcertId == id,includeProperties: "Concert").ToList();
-            return Json(new { data = OrderList });
+            JsonSerializerOptions options = new()
+            {
+                WriteIndented = true
+            };
+            List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "Artist,MusicVenue").ToList();
+            return Json(new { data = ConcertList }, new JsonSerializerOptions(options));
         }
         #endregion
+
+
     }
 
 }

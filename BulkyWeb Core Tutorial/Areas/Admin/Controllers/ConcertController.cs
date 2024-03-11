@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using MGTConcerts.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MGTConcerts.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ConcertController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
