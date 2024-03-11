@@ -119,6 +119,20 @@
         .border-indigo {
             border-color: #4238ca;
         }
+
+        .drop-class{
+            color: #808080;
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: calc(-1 * var(--bs-nav-tabs-border-width));
+            border: var(--bs-nav-tabs-border-width) solid transparent;
+            border-top-left-radius: var(--bs-nav-tabs-border-radius);
+            border-top-right-radius: var(--bs-nav-tabs-border-radius);
+        }
+
+        .drop-class:hover {
+            color: #333; /* Darken the text color slightly on hover */
+        }
     </style>
 </head>
 <body>
@@ -135,34 +149,37 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="MusicVenue" asp-action="Index">Χώροι Συναυλιών</a>
-                          </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Artist" asp-action="Index">Καλλιτέχνες</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Concert" asp-action="Index">Συναυλίες</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Cashier" asp-controller="Order" asp-action="Concerts">Κρατήσεις</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Concerts">Ιστορικό Κρατήσεων</a>
-                        </li>
+                        
+                        @if (!User.IsInRole(SD.Role_Customer))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Cashier" asp-controller="Order" asp-action="Concerts">Κρατήσεις</a>
+                            </li>
+                        }
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="More" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                More
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Contact" asp-action="Index">Contact</a></li>
-                                
-                                <li><a class="dropdown-item" asp-area="Customer" asp-controller="Information" asp-action="Index">Information</a></li>
-                             
-                            </ul>
-                        </li>
-
+                        @if (User.IsInRole(SD.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Content Managment
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="drop-class" asp-area="Admin" asp-controller="Order" asp-action="Concerts">Ιστορικό Κρατήσεων</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="drop-class" asp-area="Admin" asp-controller="MusicVenue" asp-action="Index">Χώροι Συναυλιών</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="drop-class" asp-area="Admin" asp-controller="Artist" asp-action="Index">Καλλιτέχνες</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="drop-class" asp-area="Admin" asp-controller="Concert" asp-action="Index">Συναυλίες</a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>
