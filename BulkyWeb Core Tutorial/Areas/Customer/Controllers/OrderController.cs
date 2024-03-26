@@ -7,6 +7,7 @@ using System.Reflection;
 using MGTConcerts.Utilities;
 using Stripe.Checkout;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Security.Claims;
 
 namespace MGTConcerts.Areas.Customer.Controllers
 {
@@ -39,7 +40,8 @@ namespace MGTConcerts.Areas.Customer.Controllers
             {
                 List<Order> Orders = unitOfWork.Order.GetAll(u => u.ConcertId == con.Id).ToList();
                 double availability = ((double)con.MusicVenue.Capacity - (double)Orders.Count) / (double)con.MusicVenue.Capacity *100;
-                if (availability < 30) con.ButtonColor = "red";
+                if (availability <=0) con.ButtonColor = null;
+                else if (availability < 30) con.ButtonColor = "red";
                 else if (availability >= 30 && availability <= 70) con.ButtonColor = "orange";
                 else con.ButtonColor = "green";
                 unitOfWork.Concert.Update(con);
@@ -57,7 +59,10 @@ namespace MGTConcerts.Areas.Customer.Controllers
             MusicVenue mv = unitOfWork.MusicVenue.Get(u => u.Id == concert.MusicVenueId);
             ViewBag.Concert = concert;
             ViewBag.Venue = mv;
-            return View();
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            Order order= new Order();
+            order.Email = userEmail;
+            return View(order);
         }
          
         [HttpPost]
@@ -110,12 +115,6 @@ namespace MGTConcerts.Areas.Customer.Controllers
             return View();
         }
 
-        //public IActionResult Payment(Order obj)
-        //{
-        //    Concert con = unitOfWork.Concert.Get(u => u.Id == obj.ConcertId);
-            
-
-        //}
         public IActionResult Success(int? id)
         {
             Order obj = unitOfWork.Order.Get(u => u.Id == id);

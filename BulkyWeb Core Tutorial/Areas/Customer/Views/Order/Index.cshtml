@@ -48,11 +48,18 @@
                                     <td>@obj.MusicVenue.Name</td>
                                     <td>@obj.Price</td>
                                     <td>
-                                        <div class="w-75 btn-group" role="group">
-                                            <a asp-action="Create" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="color:black; background-color:@obj.ButtonColor">
-                                                <b>Κράτηση</b>
-                                            </a>
-                                        </div>
+                                        @if (@obj.ButtonColor != null)
+                                        {
+                                            <div class="w-75 btn-group" role="group">
+                                                <a asp-action="Create" asp-route-id="@obj.Id" class="btn btn-primary mx-2" style="color:black; background-color:@obj.ButtonColor">
+                                                    <b>Κράτηση</b>
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <p><b>Sold out</b></p>
+                                        }
                                     </td>
                                 </tr>
                             }

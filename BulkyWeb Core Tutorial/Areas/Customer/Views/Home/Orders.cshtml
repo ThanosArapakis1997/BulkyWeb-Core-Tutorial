@@ -1,0 +1,24 @@
+﻿@model List<Order>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>ΣΥΝΑΥΛΙΑ</th>
+            <th>ΗΜΕΡΟΜΗΝΙΑ</th>
+            <th>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</th>
+            <th>ΕΠΙΚΟΙΝΩΝΙΑ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.Concert.ConcertName</td>
+                <td>@obj.Concert.ConcertDateStr</td>
+                <td>@obj.Name @obj.SurName</td>
+                <td>@obj.Email/ @obj.Phone</td>
+            </tr>
+        }
+    </tbody>
+</table>
