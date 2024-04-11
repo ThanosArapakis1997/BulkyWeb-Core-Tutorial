@@ -31,11 +31,44 @@ html {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
+/* Your existing CSS */
+
+/* Add media query for mobile phones */
+@media only screen and (max-width: 480px) {
+    /* Adjust font size for smaller screens */
+    html {
+        font-size: 12px;
+    }
+
+    /* Adjust styles for smaller screens */
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+
+    /* Add more styles for smaller screens as needed */
+
+    /* Example: Adjust padding for .navbar-brand */
+    a.navbar-brand {
+        padding: 0.5rem 1rem;
+    }
+
+    /* Example: Adjust margin for .divider-text */
+    .divider-text:before,
+    .divider-text:after {
+        margin: auto 0.1rem; /* Adjust margin for smaller screens */
+    }
+}
+
+/* Adjust styles for larger screens */
+@media only screen and (min-width: 481px) {
     html {
         font-size: 16px;
     }
+
+    /* Add more styles for larger screens as needed */
 }
+
+
 
 .border-top {
     border-top: 1px solid #e5e5e5;
