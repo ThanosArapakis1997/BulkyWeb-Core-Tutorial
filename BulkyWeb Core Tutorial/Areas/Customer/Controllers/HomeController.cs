@@ -2,6 +2,7 @@ using MGTConcerts.Models;
 using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace MGTConcerts.Areas.Customer.Controllers
 {
@@ -28,6 +29,17 @@ namespace MGTConcerts.Areas.Customer.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Orders()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userName = User.FindFirstValue(ClaimTypes.Name);
+
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            List<Order> orders = unitOfWork.Order.GetAll(u=> u.Email == userEmail, includeProperties: "Concert").ToList();
+
+            return View(orders);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

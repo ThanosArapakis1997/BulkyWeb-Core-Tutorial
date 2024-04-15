@@ -1,8 +1,17 @@
-﻿using Aspose.Words;
+﻿using Aspose.BarCode.Generation;
+using Aspose.Words;
+using Aspose.Words.Drawing;
+using Aspose.Words.Fields;
 using MGTConcerts.Models;
 using MGTConcerts.Repository;
 using Microsoft.VisualBasic;
+using QRCoder;
+using SkiaSharp;
+using Stripe;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Reflection;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -18,12 +27,11 @@ namespace MGTConcerts.Utilities
         }
 
         public void RenderTemplate(string template, object obj, Stream stream, IUnitOfWork unitOfWork)
-        {
+        {          
 
             Document document = new Document(template);
             string[] fields = document.MailMerge.GetFieldNames();
             DataSet set = ((IPrintingObject)obj).GetPrintingDataSet(fields, unitOfWork);
-
             document.MailMerge.ExecuteWithRegions(set);
             document.UpdateFields();
 
@@ -31,14 +39,40 @@ namespace MGTConcerts.Utilities
             {
                 document = ((IPrintingObjectUpon)obj).DoSpecialPostprocessing(document);
             }
+            // Initialize a BarcodeGenerator class object and Set CodeText & Symbology Type
+            BarcodeGenerator generator = new BarcodeGenerator(EncodeTypes.QR, "12345TEX");
+            // Set ForceQR (default) for standard QR and Code text
+            generator.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.Auto;
+            generator.Parameters.Barcode.QR.QrEncodeType = QREncodeType.ForceQR;
+            generator.Parameters.Barcode.QR.QrErrorLevel = QRErrorLevel.LevelL;
+            generator.Parameters.AutoSizeMode = AutoSizeMode.None;
+            generator.Parameters.ImageWidth.Pixels = 500;
+            generator.Parameters.ImageHeight.Pixels = 500;
+            generator.Parameters.Barcode.XDimension.Pixels = 10;
+            generator.Parameters.Barcode.Padding.Left.Millimeters = 30;
+            Aspose.Drawing.Bitmap lBmp = generator.GenerateBarCodeImage();
+
+            MemoryStream memoryStream = new MemoryStream();
+
+            lBmp.Save(memoryStream, Aspose.Drawing.Imaging.ImageFormat.Bmp);
+            memoryStream.Position = 0;
+
+            // Or Save to BMP File on Disk
+            //lBmp.Save("image.bmp", ImageFormat.Bmp);
+
+            // Load DOCX file you want to insert QR Code Image into
+            DocumentBuilder builder = new DocumentBuilder(document);
+            builder.MoveToDocumentEnd(); // or move cursor to any Node position
+            // Insert QR Code Image from Memory Stream
+            builder.InsertImage(memoryStream);            
 
             document.Save(stream, SaveFormat.Pdf);
-        }
+        }       
 
         public bool PrintToPdf(string template, object obj, string filename, out string outputFile, Stream stream, IUnitOfWork unitOfWork)
         {
             template = template + ".docx";
-            if (!File.Exists(template)) throw new Exception("Failed to find template " + template);
+            if (!System.IO.File.Exists(template)) throw new Exception("Failed to find template " + template);
             outputFile = filename + ".pdf";
 
             //if (File.Exists(outputFile)) File.Delete(outputFile);
