@@ -17,7 +17,7 @@ namespace MGTConcerts.Models
     public class ApplicationUser: IdentityUser
     {
         [Required]
-        public int Name { get; set; }
+        public int ?Name { get; set; }
 
         public string? Address {  get; set; }
         public string? Phone {  get; set; }

@@ -11,7 +11,7 @@ namespace MGTConcerts.Repository
         public ArtistRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
-        }      
+        }
 
         public void Save()
         {

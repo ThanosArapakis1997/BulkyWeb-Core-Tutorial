@@ -18,7 +18,7 @@ namespace MGTConcerts.Data
         public DbSet<Concert> Concerts { get; set; }
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }    
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

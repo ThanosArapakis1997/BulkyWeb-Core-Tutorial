@@ -11,11 +11,14 @@ namespace MGTConcerts.Repository
         
         public IConcertRepository Concert { get; private set; }
         public IOrderRepository Order { get; private set; }
+
+        public IApplicationUserRepository ApplicationUser { get; private set; }    
         //public IApplicationUserRepository ApplicationUser { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
+            ApplicationUser = new ApplicationUserRepository(_db);
             MusicVenue = new MusicVenueRepository(_db);
             Artist = new ArtistRepository(_db);
             Concert = new ConcertRepository(_db);
