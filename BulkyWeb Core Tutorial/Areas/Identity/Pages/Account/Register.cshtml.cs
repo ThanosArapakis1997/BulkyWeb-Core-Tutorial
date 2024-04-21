@@ -111,6 +111,9 @@ namespace MGTConcerts.Areas.Identity.Pages.Account
 
             // dhmiourgh8hke gia na bazoume roles sto register
             // (bgalto sto telos 'h balto sto UserManager)
+
+            [Required]
+            public string Name { get; set; }    
             public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
@@ -152,6 +155,8 @@ namespace MGTConcerts.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.Name = Input.Name;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

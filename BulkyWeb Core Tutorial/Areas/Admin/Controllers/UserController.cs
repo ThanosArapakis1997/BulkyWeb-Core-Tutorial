@@ -17,23 +17,15 @@ namespace MGTConcerts.Areas.Admin.Controllers
 
     public class UserController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        
 
-        //private readonly ApplicationDbContext _db;
-        private readonly IUnitOfWork unitOfWork;
-
-
-
-        public UserController(IUnitOfWork _unitOfWork, UserManager<IdentityUser> userManager)
+        private readonly ApplicationDbContext _db;
+        
+        public UserController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager, ApplicationDbContext db)
         {
-            _userManager = userManager;
-            unitOfWork = _unitOfWork;
+            _db = db;
 
         }
-
-        /*public UserController(ApplicationDbContext db) {
-            _db = db;
-        }*/
 
         public IActionResult Index()
         {
@@ -45,15 +37,10 @@ namespace MGTConcerts.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            // List<ApplicationUser> objUserList = _db.ApplicationUsers.Include(u=>u.UserName).ToList();
-            // List<ApplicationUser> objUserList = unitOfWork.ApplicationUser.GetAll().ToList();   
-            //List<ApplicationUser> objUserList = User.FindAll(ClaimTypes.Name);
-            //var users = _userManager.Users;
-
-            List<IdentityUser> objUserList = _userManager.Users.ToList();
-
-
+            List<ApplicationUser> objUserList = _db.ApplicationUsers.ToList();
+            
             return Json(new { data = objUserList });
+            
         }
 
 
