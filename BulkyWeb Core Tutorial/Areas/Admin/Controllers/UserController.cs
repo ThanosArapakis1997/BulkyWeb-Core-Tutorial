@@ -38,7 +38,17 @@ namespace MGTConcerts.Areas.Admin.Controllers
         public IActionResult GetAll()
         {
             List<ApplicationUser> objUserList = _db.ApplicationUsers.ToList();
-            
+
+            var userRoles = _db.UserRoles.ToList();
+            var roles = _db.Roles.ToList();
+
+            foreach (var user in objUserList) {
+                var roleId = userRoles.FirstOrDefault(u => u.UserId == user.Id).RoleId;
+                user.Role = roles.FirstOrDefault(u => u.Id == roleId).Name;
+
+
+            }
+
             return Json(new { data = objUserList });
             
         }
