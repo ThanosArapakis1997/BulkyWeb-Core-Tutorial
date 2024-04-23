@@ -15,8 +15,9 @@ function loadDataTable() {
             {
                 data: 'id',
                 "render": function (data) {
+                    
                     return `<div class="w-75 btn-group" role="group">
-                     <a href="/admin/user/getall?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>               
+                     <a href="/admin/User/RoleManagement?userId=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Update</a>               
                     </div>`
                 },
                 "width": "25%"
