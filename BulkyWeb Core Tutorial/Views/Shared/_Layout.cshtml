@@ -147,13 +147,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Αρχική Σελίδα</a>
                         </li>
                         
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                More
+                                Περισσότερα
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item">
@@ -163,7 +163,7 @@
                                     <a class="drop-class" asp-area="Customer" asp-controller="Information" asp-action="Index">Πληροφορίες</a>
                                 </li>
                     </ul>
-                        @if (!User.IsInRole(SD.Role_Customer))
+                        @if (User.IsInRole(SD.Role_Cashier))
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="Cashier" asp-controller="Order" asp-action="Concerts">Κρατήσεις</a>
@@ -183,7 +183,7 @@
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Content Managment
+                                    Λειτουργίες Διαχειριστή
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">

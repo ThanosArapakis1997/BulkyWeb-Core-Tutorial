@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using MGTConcerts.Utilities;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Stripe;
+using MGTConcerts.DbInitializer;
 
 
 
@@ -27,6 +28,8 @@ builder.Services.AddAuthentication().AddFacebook(option =>
     option.AppId = "298246019970372";
     option.AppSecret = "09b7b59ce4b378764643500188c47e5f";
 });
+
+builder.Services.AddScoped<IDbInitializer,DbInitializer>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
@@ -49,6 +52,7 @@ StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey"
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+SeedDatabase();
 
 app.MapRazorPages();
 
@@ -59,3 +63,12 @@ app.MapControllerRoute(
     
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+        dbInitializer.Initialize();
+    }
+}
