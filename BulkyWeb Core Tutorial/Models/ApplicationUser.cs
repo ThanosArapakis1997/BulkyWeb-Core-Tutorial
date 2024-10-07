@@ -16,9 +16,13 @@ namespace MGTConcerts.Models
     {
         [Required]
         public required string Name { get; set; }
-
+        
         [NotMapped]
         public string? Role { get; set; }
+
+        public int? Longitude { get; set; }
+        public int? Latitude { get; set; }
+
 
     }
 }
