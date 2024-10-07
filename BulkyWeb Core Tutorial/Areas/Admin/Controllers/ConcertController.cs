@@ -26,7 +26,8 @@ namespace MGTConcerts.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "Artist,MusicVenue").ToList();      
+            List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "Artist,MusicVenue").ToList();
+            
             return View(ConcertList);
         }
 
@@ -58,9 +59,16 @@ namespace MGTConcerts.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+
+            IEnumerable<SelectListItem> Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+
             ViewBag.MusicVenues = MusicVenues;
             ViewBag.Artists = Artists;
-
+            ViewBag.Genres = Genres;
             return View();            
         }
 
@@ -109,6 +117,12 @@ namespace MGTConcerts.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+            IEnumerable<SelectListItem> Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+            ViewBag.Genres = Genres;
             ViewBag.MusicVenues = MusicVenues;
             ViewBag.Artists = Artists;
             return View();
@@ -140,6 +154,13 @@ namespace MGTConcerts.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+
+            IEnumerable<SelectListItem> Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+            ViewBag.Genres = Genres;
             ViewBag.MusicVenues = MusicVenues;
             ViewBag.Artists = Artists;
             return View(mv);
@@ -190,6 +211,12 @@ namespace MGTConcerts.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+            IEnumerable<SelectListItem> Genres = Enum.GetValues(typeof(Genre)).Cast<Genre>().Select(v => new SelectListItem
+            {
+                Text = v.ToString(),
+                Value = ((int)v).ToString()
+            }).ToList();
+            ViewBag.Genres = Genres;
             ViewBag.MusicVenues = MusicVenues;
             ViewBag.Artists = Artists;
             return View();

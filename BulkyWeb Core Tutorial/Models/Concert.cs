@@ -5,6 +5,16 @@ using System.Text.Json.Serialization;
 
 namespace MGTConcerts.Models
 {
+    public enum Genre
+    {
+        Rock,
+        Pop,
+        Metal,
+        Rap,
+        Indie,
+        Electro
+    }
+
     public class Concert
     {
         public int Id { get; set; }
@@ -57,6 +67,8 @@ namespace MGTConcerts.Models
         [ForeignKey("MusicVenueId")]
         [ValidateNever]
         public MusicVenue? MusicVenue { get; set; }
+
+        public Genre? Genre { get; set; }
 
         [ValidateNever]
         public string? ImageUrl { get; set; }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.Numerics;
 
 namespace MGTConcerts.Data
 {
@@ -23,6 +24,13 @@ namespace MGTConcerts.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                        .Entity<Concert>()
+                        .Property(p => p.Genre)
+                        .HasConversion(
+                            v => v.ToString(),
+                            v => (Genre)Enum.Parse(typeof(Genre), v));
         }
     }
 }
