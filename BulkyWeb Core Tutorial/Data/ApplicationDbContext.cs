@@ -21,10 +21,13 @@ namespace MGTConcerts.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
+        public DbSet<Preference> Preferences { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            //tin timi tou enum tha tin katalaveineis san string 
             modelBuilder
                         .Entity<Concert>()
                         .Property(p => p.Genre)
