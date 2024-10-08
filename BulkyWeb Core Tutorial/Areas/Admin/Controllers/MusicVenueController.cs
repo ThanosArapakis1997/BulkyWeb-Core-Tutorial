@@ -4,6 +4,7 @@ using MGTConcerts.Repository;
 using Microsoft.AspNetCore.Mvc;
 using MGTConcerts.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 
 namespace MGTConcerts.Areas.Admin.Controllers
@@ -31,6 +32,8 @@ namespace MGTConcerts.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(MusicVenue obj)
         {
+            Random random = new Random();
+
             if (string.IsNullOrEmpty(obj.Name))
             {
                 ModelState.AddModelError("name", "Θα πρέπει να συμπληρώσετε Όνομα");
@@ -48,6 +51,8 @@ namespace MGTConcerts.Areas.Admin.Controllers
                 }
             }
 
+            obj.Longitude = random.Next(0, 101);
+            obj.Latitude = random.Next(0, 101);
 
             if (ModelState.IsValid)
             {

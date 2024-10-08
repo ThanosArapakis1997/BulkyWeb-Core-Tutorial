@@ -13,24 +13,14 @@ namespace MGTConcerts.Models
 
     public class MusicVenue
     {        
-        Random random = new Random();
         public int Id { get; set; }
         [Required]
         public string? Name { get; set; }
         public string? Description { get; set; }
         public string? Location { get; set;  }
 
-        private int? longitude;
-        public int? Longitude {
-            get { return longitude; }
-            set { longitude = random.Next(0, 101); }
-        }
-
-        private int ? latitude;
-        public int? Latitude { 
-            get { return latitude; }
-            set { latitude = random.Next(0, 101); } 
-        }
+        public int? Longitude { get; set; }
+        public int? Latitude { get; set; }
 
         public int Capacity { get; set; }
         public DateTime? AvailableFrom { get; set; }

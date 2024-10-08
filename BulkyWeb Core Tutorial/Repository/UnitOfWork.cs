@@ -12,8 +12,9 @@ namespace MGTConcerts.Repository
         public IConcertRepository Concert { get; private set; }
         public IOrderRepository Order { get; private set; }
 
-        public IApplicationUserRepository ApplicationUser { get; private set; }    
-        //public IApplicationUserRepository ApplicationUser { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }  
+        
+        public IPreferenceRepository Preference { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -23,6 +24,7 @@ namespace MGTConcerts.Repository
             Artist = new ArtistRepository(_db);
             Concert = new ConcertRepository(_db);
             Order = new OrderRepository(_db);
+            Preference = new PreferenceRepository(_db);
         }
 
         public void Save()

@@ -13,5 +13,15 @@ namespace MGTConcerts.Repository
             _db = db;
         }
 
+        public void Save()
+        {
+            _db.SaveChanges();
+        }
+
+        public void Update(ApplicationUser user)
+        {
+            _db.ApplicationUsers.Update(user);
+        }
+
     }
 }

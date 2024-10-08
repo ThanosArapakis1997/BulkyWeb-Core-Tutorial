@@ -20,6 +20,15 @@ namespace MGTConcerts.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.AskForPref = false;
+            if (User.Identity.IsAuthenticated) {
+                var userEmail = User.FindFirstValue(ClaimTypes.Email);
+                ApplicationUser user = unitOfWork.ApplicationUser.Get(x=> x.Email.Equals(userEmail), includeProperties: "Preference");
+                if(user.Preference == null)
+                {
+                    ViewBag.AskForPref = true;
+                }
+            }
             List<Artist> ArtistList = unitOfWork.Artist.GetAll(includeProperties: "Concerts").ToList();
             List<Concert> ConcertList = unitOfWork.Concert.GetAll().ToList();
             ViewBag.ConcertList= ConcertList;
@@ -30,6 +39,36 @@ namespace MGTConcerts.Areas.Customer.Controllers
         {
             return View();
         }
+
+        public IActionResult Recommendations()
+        {
+            List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "MusicVenue").ToList();
+            //Fuzzify and Apply Rules
+            //
+
+            return View(ConcertList.OrderBy(x=>x.Price).ToList());
+        }
+
+        public IActionResult SetPreference()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SetPreference(Preference obj)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            ApplicationUser user = unitOfWork.ApplicationUser.Get(x => x.Email.Equals(userEmail));
+            obj.UserId = user.Id;
+            unitOfWork.Preference.Add(obj);
+            unitOfWork.Save();
+
+            user.PreferenceId = obj.Id;
+            unitOfWork.ApplicationUser.Update(user);
+            unitOfWork.Save();
+            return RedirectToAction("Index");
+        }
+
 
         public IActionResult Orders()
         {

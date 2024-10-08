@@ -10,9 +10,8 @@ namespace MGTConcerts.Repository
         IOrderRepository Order { get; }
 
         IApplicationUserRepository ApplicationUser { get; } 
-
+        IPreferenceRepository Preference { get; }
         
-
         void Save();
     }
 }

@@ -17,6 +17,7 @@ namespace MGTConcerts.Repository
             this.dbset = _db.Set<T>();
             _db.Concerts.Include(u => u.Artist).Include(u => u.MusicVenue);
             _db.Orders.Include(u => u.Concert);
+            _db.Preferences.Include(u => u.User);
         }
 
         public void Add(T entity)

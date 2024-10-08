@@ -16,7 +16,7 @@ namespace MGTConcerts.Models
         public ApplicationUser? User { get; set; }
 
         [Required]
-        public bool? PriceSensitivity { get; set; }
+        public bool PriceSensitivity { get; set; }
 
         public double rockPreference{ get; set; }
 

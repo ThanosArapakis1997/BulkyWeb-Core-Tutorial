@@ -1,0 +1,100 @@
+﻿@model Preference
+<head>
+    <style>
+        .slidecontainer {
+            width: 50%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 25px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 25px;
+                height: 25px;
+                background: #04AA6D;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 25px;
+                height: 25px;
+                background: #04AA6D;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Προτιμήσεις Χρήστη</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class="border p-3">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-floating py-2 col-12">
+                    <p>Σημασία στην Τιμή</p>
+                    <input asp-for="PriceSensitivity" type="checkbox" class="form-control border-0 shadow" />
+                    <span asp-validation-for="PriceSensitivity" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <p>Προτίμηση στην Rock</p>
+                    <input asp-for="rockPreference" type="range" class="slider" id="myRange" />
+                     <span asp-validation-for="rockPreference" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <p>Προτίμηση στην Metal</p>
+                    <input asp-for="metalPreference" type="range" class="slider" id="myRange" />
+                    <span asp-validation-for="metalPreference" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <p>Προτίμηση στην Indie</p>
+                    <input asp-for="indiePreference" type="range" class="slider" id="myRange" />
+                    <span asp-validation-for="indiePreference" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <p>Προτίμηση στην Electro</p>
+                    <input asp-for="electroPreference" type="range" class="slider" id="myRange" />
+                    <span asp-validation-for="electroPreference" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <p>Προτίμηση στην Pop</p>
+                    <input asp-for="popPreference" type="range" class="slider" id="myRange" />
+                    <span asp-validation-for="popPreference" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <p>Προτίμηση στην Rap</p>
+                    <input asp-for="rapPreference" type="range" class="slider" id="myRange" />
+                    <span asp-validation-for="rapPreference" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Δημιουργία</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary border  form-control">
+                            Επιστροφή στην Αρχική Σελίδα
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

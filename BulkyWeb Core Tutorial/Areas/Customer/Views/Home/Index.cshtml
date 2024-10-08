@@ -13,7 +13,7 @@
                     <div class="slick-slide">
                         <a class="panel" asp-controller="Order" asp-action="Create" asp-route-id="@concert.Id">
                             <div class="card border-0 p-3 shadow" style="background-color: black; width:inherit;">
-                                <img src="@concert.ImageUrl" class="card-img-top rounded" style="width:550px; height:400px; background-image: url(@concert.ImageUrl); background-repeat: no-repeat;">
+                                <img src="@concert.ImageUrl" class="card-img-top rounded" style="width:550px; height:400px;" background-image: url(@concert.ImageUrl); background-repeat: no-repeat;">
                                 @*<div class="card-body pb-0">
                                     <div class="pl-1">
                                         <p class="card-title h5 text-green opacity-75 text-uppercase text-center">@concert.ConcertName</p>
@@ -57,4 +57,18 @@
             </div>
         }
     </div>
+    @if (ViewBag.AskForPref)
+    {
+        <script>
+            // Function to ask if the user wants to set preferences
+            function askForPreferences() {
+                if (confirm('Would you like to set your preferences now?')) {
+                    window.location.href = '@Url.Action("SetPreference", "Home")';
+                }
+            }
+
+            // Automatically call the function when ViewBag.AskForPref is true
+            askForPreferences();
+        </script>
+    }
 </body>

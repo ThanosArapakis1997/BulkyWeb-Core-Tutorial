@@ -1,0 +1,23 @@
+﻿@model List<Concert>
+<h1 style="text-decoration: underline;">Προτάσεις για εσάς</h1>
+@foreach (var concert in Model)
+{
+    <div class="row pb-3">
+        <div class="concert-card">
+            <div class="card-body pb-0">
+                <img src="https://localhost:7007/@concert.ImageUrl" style="width: 300px; height: 200px;" class="card-img-top rounded" />
+                <div class="concert-info">
+                    <h2 class="concert-title">@concert.ConcertName</h2>
+                    <p class="concert-date">Date: <span>@concert.ConcertDateStr</span></p>
+                    <p class="concert-venue">Venue: <span>@concert.MusicVenue.Name</span></p>
+                    <p class="concert-price">Price: <span>@concert.Price</span></p>
+                    <a asp-controller="Order" asp-action="Create" asp-route-id="@concert.Id">
+                        Buy Tickets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
