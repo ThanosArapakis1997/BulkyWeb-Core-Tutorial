@@ -35,7 +35,7 @@
                     <div class="form-floating mb-3 col-md-12">
                         <input asp-for="Input.Name" class="form-control" autocomplete="username" aria-required="true" placeholder="" />
                         <label asp-for="Input.Name" class="ms-2 text-muted">Όνομα χρήστη</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
                     </div>
                     @* <div class="form-floating mb-3 col-md-6">
                         <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">

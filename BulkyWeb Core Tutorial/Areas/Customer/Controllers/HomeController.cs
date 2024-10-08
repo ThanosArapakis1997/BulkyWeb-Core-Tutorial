@@ -11,6 +11,7 @@ namespace MGTConcerts.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork unitOfWork;
+        //define a dictionary for <Concert,scores> to store the defuzzification scores for every concert
 
         public HomeController(ILogger<HomeController> logger, IUnitOfWork _unitOfWork)
         {
