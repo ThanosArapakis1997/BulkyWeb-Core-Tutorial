@@ -13,6 +13,7 @@ namespace MGTConcerts.Areas.Customer.Controllers
         private readonly IUnitOfWork unitOfWork;
         //define a dictionary for <Concert,scores> to store the defuzzification scores for every concert
 
+
         public HomeController(ILogger<HomeController> logger, IUnitOfWork _unitOfWork)
         {
             unitOfWork = _unitOfWork;
@@ -44,9 +45,29 @@ namespace MGTConcerts.Areas.Customer.Controllers
         public IActionResult Recommendations()
         {
             List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "MusicVenue").ToList();
-            //Fuzzify and Apply Rules
+            //Dictionary<Concert,Score> myDict
+            //
+            //
             //
 
+            //Fuzzify and Apply Rules
+            //
+            //for concert in concerts
+            //  genre = getGenre()
+            //  userPref = getGenrePreference(genre)
+            //
+            //  price = getPrice()
+            //  userLoc = getUserLocation()
+            //  concertLoc = getConcertLocation()
+            //  distance = concertLoc-userLoc
+            //
+            //  score = evaluateScore(userPref, price, distance)
+            //  myDict[concert] = score
+            //
+            //sortedConcerts = SortConcerts(myDict)
+
+
+            //return View(sortedConcerts)
             return View(ConcertList.OrderBy(x=>x.Price).ToList());
         }
 
