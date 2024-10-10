@@ -1,5 +1,6 @@
 using MGTConcerts.Models;
 using MGTConcerts.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -42,32 +43,43 @@ namespace MGTConcerts.Areas.Customer.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Recommendations()
         {
             List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "MusicVenue").ToList();
-            //Dictionary<Concert,Score> myDict
-            //
-            //
-            //
+            Dictionary<int, int> ConcertScoreDict = new Dictionary<int, int>();
 
-            //Fuzzify and Apply Rules
-            //
-            //for concert in concerts
-            //  genre = getGenre()
-            //  userPref = getGenrePreference(genre)
-            //
-            //  price = getPrice()
-            //  userLoc = getUserLocation()
-            //  concertLoc = getConcertLocation()
-            //  distance = concertLoc-userLoc
-            //
-            //  score = evaluateScore(userPref, price, distance)
-            //  myDict[concert] = score
-            //
-            //sortedConcerts = SortConcerts(myDict)
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            ApplicationUser user = unitOfWork.ApplicationUser.Get(x => x.Email.Equals(userEmail), includeProperties: "Preference");
+            if (user.Preference != null)
+            {
+                //Fuzzify and Apply Rules
+                //
+                foreach(Concert concert in ConcertList)
+                {
+                    Genre? genre = concert.Genre;
+                    Preference pref = user.Preference;
 
+                    double userpreference = GetGenrePreference(pref,genre);
+                    double price= concert.Price;
 
-            //return View(sortedConcerts)
+                    //User's Location
+                    int userLong = user.Longitude.Value;
+                    int userLat = user.Latitude.Value;
+
+                    //Concert's Location
+                    int concertLong = concert.MusicVenue.Longitude.Value;
+                    int concertLat = concert.MusicVenue.Latitude.Value;
+
+                    //Calculate distance with the new service
+                    //  score = evaluateScore(userpreference, price, distance)
+                    //  myDict[concert] = score
+
+                }
+                //sortedConcerts = SortConcerts(myDict)
+                //return View(sortedConcerts)
+            }
+
             return View(ConcertList.OrderBy(x=>x.Price).ToList());
         }
 
@@ -107,6 +119,30 @@ namespace MGTConcerts.Areas.Customer.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        public double GetGenrePreference(Preference pref, Genre? gen)
+        {
+            if (gen.HasValue)
+            {
+                switch (gen.Value)
+                {
+                    case Genre.Rock:
+                        return pref.rockPreference;
+                    case Genre.Pop:
+                        return pref.popPreference;
+                    case Genre.Rap:
+                        return pref.rapPreference;
+                    case Genre.Electro:
+                        return pref.electroPreference;
+                    case Genre.Indie:
+                        return pref.indiePreference;
+                    case Genre.Metal:
+                        return pref.metalPreference;
+                }
+            }
+            return 0;
         }
     }
 }
