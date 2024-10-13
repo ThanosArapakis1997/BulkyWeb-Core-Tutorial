@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using MGTConcerts.FuzzyLogic;
 
 namespace MGTConcerts.Areas.Customer.Controllers
 {
@@ -46,9 +47,15 @@ namespace MGTConcerts.Areas.Customer.Controllers
         [Authorize]
         public IActionResult Recommendations()
         {
+            // Initialize the fuzzy logic system
+            FuzzyLogicSystem fuzzyLogicSystem = new FuzzyLogicSystem();
+            DistanceCalculationService distanceCalculationService = new DistanceCalculationService();
+
+            //Get all concerts
             List<Concert> ConcertList = unitOfWork.Concert.GetAll(includeProperties: "MusicVenue").ToList();
             Dictionary<int, int> ConcertScoreDict = new Dictionary<int, int>();
 
+            //get current user
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
             ApplicationUser user = unitOfWork.ApplicationUser.Get(x => x.Email.Equals(userEmail), includeProperties: "Preference");
             if (user.Preference != null)
@@ -60,7 +67,7 @@ namespace MGTConcerts.Areas.Customer.Controllers
                     Genre? genre = concert.Genre;
                     Preference pref = user.Preference;
 
-                    double userpreference = GetGenrePreference(pref,genre);
+                    double userPreference = GetGenrePreference(pref,genre);
                     double price= concert.Price;
 
                     //User's Location
@@ -71,13 +78,15 @@ namespace MGTConcerts.Areas.Customer.Controllers
                     int concertLong = concert.MusicVenue.Longitude.Value;
                     int concertLat = concert.MusicVenue.Latitude.Value;
 
-                    //Calculate distance with the new service
-                    //  score = evaluateScore(userpreference, price, distance)
-                    //  myDict[concert] = score
+                    //Calculate distance with the new service DistanceCalculationService()
+
+                    double distance  = distanceCalculationService.CalculateDistance(userLong,userLat, concertLong, concertLat);
+                    double recommendation = fuzzyLogicSystem.GetRecommendation(price, userPreference, distance);
+                    concert.FuzzyScore = recommendation;
 
                 }
-                //sortedConcerts = SortConcerts(myDict)
-                //return View(sortedConcerts)
+
+                return View(ConcertList.OrderBy(x => x.FuzzyScore).ToList());
             }
 
             return View(ConcertList.OrderBy(x=>x.Price).ToList());
@@ -140,6 +149,8 @@ namespace MGTConcerts.Areas.Customer.Controllers
                         return pref.indiePreference;
                     case Genre.Metal:
                         return pref.metalPreference;
+                    default:
+                        return 0;
                 }
             }
             return 0;

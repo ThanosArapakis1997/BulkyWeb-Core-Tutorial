@@ -51,6 +51,7 @@ namespace MGTConcerts.Areas.Admin.Controllers
                 }
             }
 
+            //initialize location of music venue
             obj.Longitude = random.Next(0, 101);
             obj.Latitude = random.Next(0, 101);
 

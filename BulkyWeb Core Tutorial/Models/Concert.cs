@@ -72,5 +72,9 @@ namespace MGTConcerts.Models
 
         [ValidateNever]
         public string? ImageUrl { get; set; }
+
+        //temporary variable for the reccomendation fuzzy score whatever
+        [NotMapped]
+        public double FuzzyScore{ get; set; }
     }
 }
