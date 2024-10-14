@@ -86,7 +86,7 @@ namespace MGTConcerts.Areas.Customer.Controllers
 
                 }
 
-                return View(ConcertList.OrderBy(x => x.FuzzyScore).ToList());
+                return View(ConcertList.OrderByDescending(x => x.FuzzyScore).ToList());
             }
 
             return View(ConcertList.OrderBy(x=>x.Price).ToList());

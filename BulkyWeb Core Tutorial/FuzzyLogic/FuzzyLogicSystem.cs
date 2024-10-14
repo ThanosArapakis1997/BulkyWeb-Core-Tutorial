@@ -54,12 +54,57 @@
             // Add rules to the fuzzy engine
             //TODO: FTIAKSE TOUS KANONES OLOUS 
             fuzzyEngine.Rules.Add(
+
+                //Price = Low
+                
+                //Preference = Low
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceLow)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceLow)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationLow)),
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceLow)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow)),
+
+                //Preference = Medium
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceMedium)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationHigh)),
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceMedium)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceMedium)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow)),
+
+                //Preference = High
                 Rule.If(price.Is(priceLow).And(preference.Is(preferenceHigh)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationHigh)),
-                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceMedium)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceHigh)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationHigh)),
+                Rule.If(price.Is(priceLow).And(preference.Is(preferenceHigh)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationMedium)),
+
+                //Price = Medium
+
+                //Preference = Low
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceLow)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationLow)),
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceLow)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationLow)),
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceLow)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow)),
+
+                //Preference = Medium
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceMedium)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceMedium)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationLow)),
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceMedium)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow)),
+
+                //Preference = High
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceHigh)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationHigh)),
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceHigh)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceHigh)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationMedium)),
+
+                //Price = High
+
+                //Preference = Low
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceLow)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationLow)),
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceLow)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationLow)),
                 Rule.If(price.Is(priceHigh).And(preference.Is(preferenceLow)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow)),
-                Rule.If(price.Is(priceLow).And(preference.Is(preferenceMedium)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationMedium)),
-                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceHigh)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationHigh)),
-                Rule.If(price.Is(priceMedium).And(preference.Is(preferenceLow)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationLow))
+
+                //Preference = Medium
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceMedium)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceMedium)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationLow)),
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceMedium)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow)),
+
+                //Preference = High
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceHigh)).And(distance.Is(distanceNear))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceHigh)).And(distance.Is(distanceModerate))).Then(recommendation.Is(recommendationMedium)),
+                Rule.If(price.Is(priceHigh).And(preference.Is(preferenceHigh)).And(distance.Is(distanceFar))).Then(recommendation.Is(recommendationLow))   
             );
 
 
