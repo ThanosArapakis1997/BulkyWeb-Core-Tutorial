@@ -20,7 +20,11 @@
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            <div class="d-flex gap-2">
+                <button id="update-profile-button" type="submit" class="w-50 btn btn-lg btn-primary">Save</button>
+                <div class="col-4 text-start"><a asp-area="Customer" asp-controller="Home" asp-action="SetPreference" class="btn btn-primary"> Preference change</a></div>
+            </div>
+
         </form>
     </div>
 </div>

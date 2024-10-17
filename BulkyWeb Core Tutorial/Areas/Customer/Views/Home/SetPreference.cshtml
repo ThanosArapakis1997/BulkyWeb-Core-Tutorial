@@ -2,7 +2,17 @@
 <head>
     <style>
         .slidecontainer {
-            width: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-wrapper {
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .slider {
@@ -12,8 +22,7 @@
             background: #d3d3d3;
             outline: none;
             opacity: 0.7;
-            -webkit-transition: .2s;
-            transition: opacity .2s;
+            transition: background-color 0.2s;
         }
 
             .slider:hover {
@@ -35,8 +44,17 @@
                 background: #04AA6D;
                 cursor: pointer;
             }
+
+        .left-percentage, .right-percentage {
+            width: 50px;
+            text-align: center;
+        }
     </style>
 </head>
+
+
+
+
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
@@ -56,34 +74,68 @@
                 </div>
                 <div class="form-floating py-2 col-12">
                     <p>Προτίμηση στην Rock</p>
-                    <input asp-for="rockPreference" type="range" class="slider" id="myRange" />
-                     <span asp-validation-for="rockPreference" class="text-danger"></span>
+                    <div class="slider-wrapper">
+                        <span class="left-percentage">0%</span>
+                        <input asp-for="rockPreference" type="range" class="slider" id="rockSlider" value="50" min="0" max="100" />
+                        <span class="right-percentage">100%</span>
+                    </div>
+                    <span asp-validation-for="rockPreference" class="text-danger"></span>
                 </div>
+
                 <div class="form-floating py-2 col-12">
                     <p>Προτίμηση στην Metal</p>
-                    <input asp-for="metalPreference" type="range" class="slider" id="myRange" />
+                    <div class="slider-wrapper">
+                        <span class="left-percentage">0%</span>
+                        <input asp-for="metalPreference" type="range" class="slider" id="μεταλSlider" value="50" min="0" max="100" />
+                        <span class="right-percentage">100%</span>
+                    </div>
                     <span asp-validation-for="metalPreference" class="text-danger"></span>
                 </div>
+
+
                 <div class="form-floating py-2 col-12">
                     <p>Προτίμηση στην Indie</p>
-                    <input asp-for="indiePreference" type="range" class="slider" id="myRange" />
+                    <div class="slider-wrapper">
+                        <span class="left-percentage">0%</span>
+                        <input asp-for="indiePreference" type="range" class="slider" id="indieSlider" value="50" min="0" max="100" />
+                        <span class="right-percentage">100%</span>
+                    </div>
                     <span asp-validation-for="indiePreference" class="text-danger"></span>
                 </div>
+
                 <div class="form-floating py-2 col-12">
                     <p>Προτίμηση στην Electro</p>
-                    <input asp-for="electroPreference" type="range" class="slider" id="myRange" />
+                    <div class="slider-wrapper">
+                        <span class="left-percentage">0%</span>
+                        <input asp-for="electroPreference" type="range" class="slider" id="electroSlider" value="50" min="0" max="100" />
+                        <span class="right-percentage">100%</span>
+                    </div>
                     <span asp-validation-for="electroPreference" class="text-danger"></span>
                 </div>
+
                 <div class="form-floating py-2 col-12">
                     <p>Προτίμηση στην Pop</p>
-                    <input asp-for="popPreference" type="range" class="slider" id="myRange" />
+                    <div class="slider-wrapper">
+                        <span class="left-percentage">0%</span>
+                        <input asp-for="popPreference" type="range" class="slider" id="popSlider" value="50" min="0" max="100" />
+                        <span class="right-percentage">100%</span>
+                    </div>
                     <span asp-validation-for="popPreference" class="text-danger"></span>
                 </div>
+
                 <div class="form-floating py-2 col-12">
                     <p>Προτίμηση στην Rap</p>
-                    <input asp-for="rapPreference" type="range" class="slider" id="myRange" />
+                    <div class="slider-wrapper">
+                        <span class="left-percentage">0%</span>
+                        <input asp-for="rapPreference" type="range" class="slider" id="rapSlider" value="50" min="0" max="100" />
+                        <span class="right-percentage">100%</span>
+                    </div>
                     <span asp-validation-for="rapPreference" class="text-danger"></span>
                 </div>
+
+
+
+     
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-primary form-control">Δημιουργία</button>
@@ -98,3 +150,22 @@
         </form>
     </div>
 </div>
+
+<script>
+    // Αλλαγή χρώματος slider ανάλογα με την τιμή
+    function updateSliderColor(slider) {
+        const value = slider.value;
+        const percentage = value + '%';
+        slider.style.background = `linear-gradient(90deg, #04AA6D ${percentage}, #d3d3d3 ${percentage})`;
+    }
+
+    // Εφαρμογή για κάθε slider
+    document.querySelectorAll('.slider').forEach(slider => {
+        slider.addEventListener('input', function() {
+            updateSliderColor(this);
+        });
+
+        // Αρχική ρύθμιση χρώματος
+        updateSliderColor(slider);
+    });
+</script>

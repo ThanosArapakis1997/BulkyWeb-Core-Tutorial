@@ -92,26 +92,57 @@ namespace MGTConcerts.Areas.Customer.Controllers
             return View(ConcertList.OrderBy(x=>x.Price).ToList());
         }
 
+      
+      ////////////////////////////////////////////////////////////////////////////
+     
+        [Authorize]
         public IActionResult SetPreference()
         {
-            return View();
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            ApplicationUser user = unitOfWork.ApplicationUser.Get(x => x.Email.Equals(userEmail), includeProperties: "Preference");
+
+            if (user.Preference == null)
+            {
+                
+                user.Preference = new Preference();
+            }
+
+            
+            return View(user.Preference);
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult SetPreference(Preference obj)
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
             ApplicationUser user = unitOfWork.ApplicationUser.Get(x => x.Email.Equals(userEmail));
+
             obj.UserId = user.Id;
-            unitOfWork.Preference.Add(obj);
+
+            if (user.PreferenceId == null)
+            {
+                
+                unitOfWork.Preference.Add(obj);
+            }
+            else
+            {
+                
+                unitOfWork.Preference.Update(obj);
+            }
             unitOfWork.Save();
 
+           
             user.PreferenceId = obj.Id;
             unitOfWork.ApplicationUser.Update(user);
             unitOfWork.Save();
+
+           
             return RedirectToAction("Index");
         }
 
+      //////////////////////////////////////////////////////////////////
+      
 
         public IActionResult Orders()
         {
